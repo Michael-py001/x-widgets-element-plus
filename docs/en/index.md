@@ -4,6 +4,9 @@ hero:
   name: x-widgets-element-plus
   text: ''
   tagline: Typed schema widgets for forms, tables, and administrative-area selection built on Element Plus 2.
+  image:
+    src: /logo.svg
+    alt: logo
   actions:
     - theme: brand
       text: Get started
