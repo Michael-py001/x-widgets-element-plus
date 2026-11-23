@@ -1,5 +1,6 @@
 import { reactive } from 'vue';
 import { mount } from '@vue/test-utils';
+import { ElCascader } from 'element-plus';
 import { describe, expect, it } from 'vitest';
 import FormItem from './FormItem';
 
@@ -281,6 +282,145 @@ describe('FormItem textarea support', () => {
     expect(control.props('data')).toHaveLength(1);
     await control.vm.$emit('update:modelValue', 'fe');
     expect(formData.dept).toBe('fe');
+  });
+
+  it('renders input-password fields with a password input and syncs the value', async () => {
+    const formData = reactive({ password: '' });
+    const wrapper = mount(FormItem, {
+      props: { label: '密码', name: 'password', type: 'input-password', formData }
+    });
+    const input = wrapper.find('input');
+
+    expect(input.attributes('type')).toBe('password');
+    await input.setValue('secret123');
+    expect(formData.password).toBe('secret123');
+  });
+
+  it('renders input-search fields with a prefix icon and syncs the value', async () => {
+    const formData = reactive({ keyword: '' });
+    const wrapper = mount(FormItem, {
+      props: { label: '关键词', name: 'keyword', type: 'input-search', formData }
+    });
+    const input = wrapper.find('input');
+
+    expect(input.exists()).toBe(true);
+    await input.setValue('hello');
+    expect(formData.keyword).toBe('hello');
+  });
+
+  it('renders city-picker fields through AreaCascader at city level and syncs the path', async () => {
+    const formData = reactive({ city: [] as string[] });
+    const wrapper = mount(FormItem, {
+      props: { label: '城市', name: 'city', type: 'city-picker', formData },
+      global: { components: { ElCascader } }
+    });
+    const cascader = wrapper.findComponent({ name: 'AreaCascader' });
+
+    expect(cascader.exists()).toBe(true);
+    expect(cascader.props('maxLevel')).toBe(2);
+    await cascader.vm.$emit('update:modelValue', ['广东省', '深圳市']);
+    expect(formData.city).toEqual(['广东省', '深圳市']);
+  });
+
+  it('renders area-picker fields through AreaCascader at district level and syncs the path', async () => {
+    const formData = reactive({ area: [] as string[] });
+    const wrapper = mount(FormItem, {
+      props: { label: '地区', name: 'area', type: 'area-picker', formData },
+      global: { components: { ElCascader } }
+    });
+    const cascader = wrapper.findComponent({ name: 'AreaCascader' });
+
+    expect(cascader.exists()).toBe(true);
+    expect(cascader.props('maxLevel')).toBe(3);
+    await cascader.vm.$emit('update:modelValue', ['广东省', '深圳市', '南山区']);
+    expect(formData.area).toEqual(['广东省', '深圳市', '南山区']);
+  });
+
+  it('renders range-input fields with two inputs and writes a two-element array', async () => {
+    const formData = reactive({ priceRange: [] as string[] });
+    const wrapper = mount(FormItem, {
+      props: { label: '价格区间', name: 'priceRange', type: 'range-input', formData }
+    });
+    const inputs = wrapper.findAll('input');
+
+    expect(inputs).toHaveLength(2);
+    await inputs[0].setValue('10');
+    await inputs[1].setValue('20');
+    expect(formData.priceRange).toEqual(['10', '20']);
+  });
+
+  it('renders cascader fields with normalized options and syncs the value', async () => {
+    const formData = reactive({ region: '' });
+    const wrapper = mount(FormItem, {
+      props: {
+        label: '区域',
+        name: 'region',
+        type: 'cascader',
+        formData,
+        options: [{ value: 'north', label: '北区' }]
+      }
+    });
+    const control = wrapper.findComponent({ name: 'ElCascader' });
+
+    expect(control.exists()).toBe(true);
+    expect(control.props('options')).toEqual([{ value: 'north', label: '北区' }]);
+    await control.vm.$emit('update:modelValue', 'north');
+    expect(formData.region).toBe('north');
+  });
+
+  it('renders rate fields and syncs the score', async () => {
+    const formData = reactive({ score: 0 });
+    const wrapper = mount(FormItem, {
+      props: { label: '评分', name: 'score', type: 'rate', formData }
+    });
+    const control = wrapper.findComponent({ name: 'ElRate' });
+
+    expect(control.exists()).toBe(true);
+    await control.vm.$emit('update:modelValue', 4);
+    expect(formData.score).toBe(4);
+  });
+
+  it('renders slider fields and syncs the value', async () => {
+    const formData = reactive({ percent: 0 });
+    const wrapper = mount(FormItem, {
+      props: { label: '百分比', name: 'percent', type: 'slider', formData }
+    });
+    const control = wrapper.findComponent({ name: 'ElSlider' });
+
+    expect(control.exists()).toBe(true);
+    await control.vm.$emit('update:modelValue', 60);
+    expect(formData.percent).toBe(60);
+  });
+
+  it('renders color-picker fields and syncs the color', async () => {
+    const formData = reactive({ color: '' });
+    const wrapper = mount(FormItem, {
+      props: { label: '颜色', name: 'color', type: 'color-picker', formData }
+    });
+    const control = wrapper.findComponent({ name: 'ElColorPicker' });
+
+    expect(control.exists()).toBe(true);
+    await control.vm.$emit('update:modelValue', '#ff0000');
+    expect(formData.color).toBe('#ff0000');
+  });
+
+  it('renders mentions fields and syncs the text', async () => {
+    const formData = reactive({ note: '' });
+    const wrapper = mount(FormItem, {
+      props: {
+        label: '备注',
+        name: 'note',
+        type: 'mentions',
+        formData,
+        options: [{ value: 'alice', label: 'alice' }]
+      }
+    });
+    const control = wrapper.findComponent({ name: 'ElMention' });
+
+    expect(control.exists()).toBe(true);
+    expect(control.props('options')).toEqual([{ value: 'alice', label: 'alice' }]);
+    await control.vm.$emit('update:modelValue', 'hi @alice');
+    expect(formData.note).toBe('hi @alice');
   });
 
   it('renders autocomplete fields, writes valueKey to formData, and keeps related-field events', async () => {

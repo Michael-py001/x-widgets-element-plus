@@ -19,7 +19,17 @@ export type formItemTypes =
   | 'radio-group'
   | 'switch'
   | 'autocomplete'
-  | 'auto-complete';
+  | 'auto-complete'
+  | 'input-password'
+  | 'input-search'
+  | 'city-picker'
+  | 'area-picker'
+  | 'range-input'
+  | 'cascader'
+  | 'rate'
+  | 'slider'
+  | 'color-picker'
+  | 'mentions';
 
 /**
  * 表单字段名路径。

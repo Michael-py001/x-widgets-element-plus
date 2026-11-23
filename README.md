@@ -1,5 +1,7 @@
 # x-widgets-element-plus
 
+[![CI](https://github.com/Michael-py001/x-widgets-element-plus/actions/workflows/ci.yml/badge.svg)](https://github.com/Michael-py001/x-widgets-element-plus/actions/workflows/ci.yml) [![Docs](https://img.shields.io/badge/docs-online-blue.svg)](https://michael-py001.github.io/x-widgets-element-plus/) [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
+
 Vue 3 component library built on Element Plus. The package provides Element Plus control adapters and schema-driven form, table, dialog, feedback, and China administrative-area widgets without depending on host-application APIs.
 
 ## Requirements
@@ -44,7 +46,7 @@ import type { AreaNode, SearchFormProps, TableColumn } from 'x-widgets-element-p
 
 ## Documentation
 
-The English and Chinese VitePress site source is in `docs/`. Run `npm run docs:dev` to view it locally or `npm run docs:build` to build the static site. The `Deploy documentation` workflow publishes the site to GitHub Pages on pushes to `main` and via manual dispatch. In the repository's **Settings → Pages**, select **GitHub Actions** as the build and deployment source. Repository contributors can also use `.agents/skills/x-widgets-element-plus/SKILL.md` with coding agents.
+The English and Chinese documentation is published at https://michael-py001.github.io/x-widgets-element-plus/ (source in `docs/`). Run `npm run docs:dev` to view it locally or `npm run docs:build` to build the static site. The `Deploy documentation` workflow publishes the site to GitHub Pages on pushes to `main` and via manual dispatch; Pages must use **GitHub Actions** as its build and deployment source. Repository contributors can also use `.agents/skills/x-widgets-element-plus/SKILL.md` with coding agents.
 
 ## Development
 

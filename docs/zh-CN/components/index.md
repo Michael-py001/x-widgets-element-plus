@@ -4,7 +4,7 @@
 
 ## 基础控件
 
-`Autocomplete`、`Checkbox`、`CheckboxGroup`、`DatePicker`、`Input`、`InputNumber`、`RadioGroup`、`Select`、`SelectOption`、`Switch`、`TimePicker`、`TreeSelect`、`Table`、`TableVirtualized`、`Textarea` 和 `Text`。
+`Autocomplete`、`AreaPicker`、`Cascader`、`Checkbox`、`CheckboxGroup`、`CityPicker`、`ColorPicker`、`DatePicker`、`Input`、`InputNumber`、`InputPassword`、`InputSearch`、`Mentions`、`RadioGroup`、`RangeInput`、`Rate`、`Select`、`SelectOption`、`Slider`、`Switch`、`TimePicker`、`TreeSelect`、`Table`、`TableVirtualized`、`Textarea` 和 `Text`。
 
 ## 业务组件
 

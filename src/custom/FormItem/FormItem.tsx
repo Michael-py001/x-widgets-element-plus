@@ -32,6 +32,16 @@ import CheckboxGroup from '../../element-ui/CheckboxGroup/BasicCheckboxGroup';
 import Switch from '../../element-ui/Switch';
 import TreeSelect from '../../element-ui/TreeSelect';
 import Text from '../../element-ui/Text/BasicText';
+import InputPassword from '../../element-ui/InputPassword';
+import InputSearch from '../../element-ui/InputSearch';
+import CityPicker from '../../element-ui/CityPicker';
+import AreaPicker from '../../element-ui/AreaPicker';
+import RangeInput from '../../element-ui/RangeInput';
+import Cascader from '../../element-ui/Cascader';
+import Rate from '../../element-ui/Rate';
+import Slider from '../../element-ui/Slider';
+import ColorPicker from '../../element-ui/ColorPicker';
+import Mentions from '../../element-ui/Mentions';
 import dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn';
 dayjs.locale('zh-cn');
@@ -176,7 +186,17 @@ const FormItemComponent = defineComponent({
       'time-picker': TimePicker,
       'time-range-picker': TimePicker,
       autocomplete: Autocomplete,
-      'auto-complete': Autocomplete
+      'auto-complete': Autocomplete,
+      'input-password': InputPassword,
+      'input-search': InputSearch,
+      'city-picker': CityPicker,
+      'area-picker': AreaPicker,
+      'range-input': RangeInput,
+      cascader: Cascader,
+      rate: Rate,
+      slider: Slider,
+      'color-picker': ColorPicker,
+      mentions: Mentions
     };
     const cityPicker: Ref<HTMLElement | null> = ref(null);
 

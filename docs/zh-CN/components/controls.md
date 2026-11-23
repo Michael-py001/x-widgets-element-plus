@@ -6,14 +6,24 @@
 
 ```ts
 import {
+  AreaPicker,
   Autocomplete,
+  Cascader,
   Checkbox,
   CheckboxGroup,
+  CityPicker,
+  ColorPicker,
   DatePicker,
   Input,
   InputNumber,
+  InputPassword,
+  InputSearch,
+  Mentions,
   RadioGroup,
+  RangeInput,
+  Rate,
   Select,
+  Slider,
   Switch,
   Text,
   Textarea,
@@ -31,10 +41,20 @@ import 'x-widgets-element-plus/style.css'
 | 组件 | 用途 | 本包契约 |
 | --- | --- | --- |
 | `Input` | 单行文本 | 直接使用时支持 `v-model`；在 Schema 中，`name`、`formData`、`label`、`props` 和 `event` 由表单桥接消费。 |
+| `InputPassword` | 密码输入 | Element Plus Input 固定 `type="password"`；Schema 值 `input-password`。 |
+| `InputSearch` | 搜索输入 | Element Plus Input 带搜索前缀图标；回车触发 `event.onSearch`；Schema 值 `input-search`。 |
 | `Textarea` | 多行文本 | 使用 Element Plus textarea 语义，并支持同样的表单桥接。 |
 | `InputNumber` | 数值 | 保留 Element Plus 的 `min`、`max`、`step` 和 `precision`。 |
 | `Select` | 单选或多选 | 使用 Element Plus Select 属性，并支持本包的 Schema 桥接。 |
+| `Cascader` | 多级级联选择 | 包装 Element Plus Cascader；Schema 的 `options` 会归一化；Schema 值 `cascader`。 |
 | `TreeSelect` | 从树中选择节点 | 包装 Element Plus TreeSelect；Schema 的 `options` 会归一化为原生 `data`。 |
+| `CityPicker` | 市级地区选择 | 通过 `AreaCascader` 使用内置行政区数据（`maxLevel=2`）；Schema 值 `city-picker`。 |
+| `AreaPicker` | 区级地区选择 | 通过 `AreaCascader` 使用内置行政区数据（`maxLevel=3`）；Schema 值 `area-picker`。 |
+| `RangeInput` | 双值区间 | 两个 Element Plus Input 由分隔符连接；写入 `[start, end]` 数组；Schema 值 `range-input`。 |
+| `Rate` | 星级评分 | 包装 Element Plus Rate；Schema 值 `rate`。 |
+| `Slider` | 数值滑块 | 包装 Element Plus Slider；Schema 值 `slider`。 |
+| `ColorPicker` | 颜色选择 | 包装 Element Plus ColorPicker；Schema 值 `color-picker`。 |
+| `Mentions` | `@` 提及输入 | 基于 Element Plus `ElMention`；Schema 的 `options` 会归一化；Schema 值 `mentions`。 |
 | `DatePicker` | 日期或日期范围 | 使用 Element Plus DatePicker 属性，并支持本包的 Schema 桥接。 |
 | `TimePicker` | 时间或时间范围 | 使用 Element Plus TimePicker 属性；Schema 的 `time-range-picker` 会自动设置 `isRange`。 |
 | `RadioGroup` | 单值选项 | `options` 支持数组、只读数组、`Ref` 和 `ComputedRef`；可用 `labelKey`、`valueKey` 指定字段。 |
@@ -100,5 +120,6 @@ Schema 管理的字段不要再传第二个 `v-model`。如果自定义控件仍
 - 原生行为以 Element Plus props 与事件为准。
 - `Table` 与 `TableVirtualized` 是两套不同契约；`TableColumn` 只适用于普通表格，不适用于 Table V2。
 - `DatePicker` 与 `Select` 是包根目录导出和 Schema 适配器；原生属性遵循 Element Plus 契约。
-- `AreaCascader` 是公开导出，默认带内置数据，也支持显式 `treeData`；详见独立参考页。
+- `AreaCascader` 是公开导出，默认带内置数据，也支持显式 `treeData`；详见独立参考页。`CityPicker` 与 `AreaPicker` 是基于它的固定层级 Schema 适配器。
+- `Mentions` 对应 Element Plus 的 `ElMention`（组件导出名）；其原生 `props` 字段保留 ElMention 的选项别名含义，而非表单桥接含义。
 - 生成声明和本文档中没有的 prop 不要自行臆造。

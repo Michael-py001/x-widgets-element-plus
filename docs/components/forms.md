@@ -116,7 +116,7 @@ Use the exported `ColumnForFormItemType` for each field. Common keys include:
 | Field | Meaning |
 | --- | --- |
 | `name`, `label` | Model path and visible label. `name` may be a string or path array. |
-| `el` / `type` | Control kind: `input` (`x-input` alias), `select` (`x-select` alias), `tree-select`, `textarea`, `input-number`, `date-picker`, `range-picker` (date range), `time-picker`, `time-range-picker`, `checkbox`, `checkbox-group`, `radio-group`, `switch`, `autocomplete` (`auto-complete` alias), or `text`. |
+| `el` / `type` | Control kind: `input` (`x-input` alias), `input-password`, `input-search`, `select` (`x-select` alias), `tree-select`, `cascader`, `textarea`, `input-number`, `date-picker`, `range-picker` (date range), `time-picker`, `time-range-picker`, `city-picker`, `area-picker`, `range-input`, `rate`, `slider`, `color-picker`, `mentions`, `checkbox`, `checkbox-group`, `radio-group`, `switch`, `autocomplete` (`auto-complete` alias), or `text`. |
 | `props` | Element Plus control props. |
 | `options` | Choice data; supports arrays and reactive/function data sources. Top-level `options` takes precedence over `props.options`. |
 | `rules`, `required` | Element Plus validation rules and generated required rules. |

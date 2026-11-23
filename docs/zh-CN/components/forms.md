@@ -116,7 +116,7 @@ const formModel: FormModelBlock[] = [
 | 字段 | 含义 |
 | --- | --- |
 | `name`、`label` | 模型路径与可见标签。`name` 可以是字符串或路径数组。 |
-| `el` / `type` | 控件类型：`input`（别名 `x-input`）、`select`（别名 `x-select`）、`tree-select`、`textarea`、`input-number`、`date-picker`、`range-picker`（日期范围）、`time-picker`、`time-range-picker`、`checkbox`、`checkbox-group`、`radio-group`、`switch`、`autocomplete`（别名 `auto-complete`）或 `text`。 |
+| `el` / `type` | 控件类型：`input`（别名 `x-input`）、`input-password`、`input-search`、`select`（别名 `x-select`）、`tree-select`、`cascader`、`textarea`、`input-number`、`date-picker`、`range-picker`（日期范围）、`time-picker`、`time-range-picker`、`city-picker`、`area-picker`、`range-input`、`rate`、`slider`、`color-picker`、`mentions`、`checkbox`、`checkbox-group`、`radio-group`、`switch`、`autocomplete`（别名 `auto-complete`）或 `text`。 |
 | `props` | Element Plus 控件 props。 |
 | `options` | 选项数据；支持数组以及响应式/函数数据源。顶层 `options` 优先于 `props.options`。 |
 | `rules`、`required` | Element Plus 校验规则与自动生成的必填规则。 |

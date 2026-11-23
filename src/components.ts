@@ -12,6 +12,16 @@ export { default as DatePicker } from './element-ui/DatePicker';
 export { default as TimePicker } from './element-ui/TimePicker';
 export { default as Select, SelectOption } from './element-ui/Select';
 export { default as TreeSelect } from './element-ui/TreeSelect';
+export { default as InputPassword } from './element-ui/InputPassword';
+export { default as InputSearch } from './element-ui/InputSearch';
+export { default as CityPicker } from './element-ui/CityPicker';
+export { default as AreaPicker } from './element-ui/AreaPicker';
+export { default as RangeInput } from './element-ui/RangeInput';
+export { default as Cascader } from './element-ui/Cascader';
+export { default as Rate } from './element-ui/Rate';
+export { default as Slider } from './element-ui/Slider';
+export { default as ColorPicker } from './element-ui/ColorPicker';
+export { default as Mentions } from './element-ui/Mentions';
 
 export { default as CustomForm } from './custom/Form';
 export type {

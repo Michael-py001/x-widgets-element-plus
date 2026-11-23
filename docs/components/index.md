@@ -4,7 +4,7 @@ This catalog follows the package-root exports in `src/components.ts`. Import fro
 
 ## Controls
 
-`Autocomplete`, `Checkbox`, `CheckboxGroup`, `DatePicker`, `Input`, `InputNumber`, `RadioGroup`, `Select`, `SelectOption`, `Switch`, `TimePicker`, `TreeSelect`, `Table`, `TableVirtualized`, `Textarea`, and `Text`.
+`Autocomplete`, `AreaPicker`, `Cascader`, `Checkbox`, `CheckboxGroup`, `CityPicker`, `ColorPicker`, `DatePicker`, `Input`, `InputNumber`, `InputPassword`, `InputSearch`, `Mentions`, `RadioGroup`, `RangeInput`, `Rate`, `Select`, `SelectOption`, `Slider`, `Switch`, `TimePicker`, `TreeSelect`, `Table`, `TableVirtualized`, `Textarea`, and `Text`.
 
 ## Business widgets
 
