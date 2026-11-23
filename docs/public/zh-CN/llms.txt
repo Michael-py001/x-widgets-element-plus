@@ -1,0 +1,31 @@
+# x-widgets-element-plus
+
+> 基于 Element Plus 2 构建的 Vue 3 表单、表格与业务组件。
+
+- 包名：`x-widgets-element-plus`（MIT）
+- 运行环境：Vue 3.5+ 与 Element Plus 2.11+。
+- 安装：`npm install x-widgets-element-plus vue element-plus @element-plus/icons-vue`
+- 样式：`element-plus/dist/index.css` 与 `x-widgets-element-plus/style.css`。
+- 公开 API：包根目录的具名导出；内部源码路径不属于稳定 API。
+
+## 优先阅读
+
+- [快速开始](./guide)
+- [导出的组件](./components)
+- [基础控件](./components/controls)
+- [Schema 表单](./components/forms)
+- [表格与虚拟滚动](./components/table)
+- [AreaCascader](./components/area-cascader)
+- [LoadingProgress](./components/loading-progress)
+- [跨库兼容性](./components/compatibility)
+- [AI 指南](./ai)
+- Agent skill（仓库源码）：`.agents/skills/x-widgets-element-plus/SKILL.md`
+- Agent skill（随文档发布）：`../agents/skills/x-widgets-element-plus/SKILL.md`
+
+## 事实依据规则
+
+- 宿主应用负责 API 请求、业务模型，以及传入的表单/表格数据。
+- schema 驱动表单使用 `ColumnForFormItemType` 与 `FormModelBlock`；`SearchForm` 使用扁平的 column 列表。
+- `Table` 与 `TableVirtualized` 是两套不同的渲染契约；不要推断 `TableColumn` 适用于 V2。
+- `AreaCascader` 默认使用内置数据并接受 `treeData`；其 `change` 事件派发归一化后的路径数组。
+- 不要假定与 Ant Design Vue 包一致，也不要臆造未文档化的 props。

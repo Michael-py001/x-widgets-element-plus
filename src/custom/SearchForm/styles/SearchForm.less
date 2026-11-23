@@ -1,0 +1,78 @@
+.x-search-form {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  // margin-bottom: 22px;
+  // padding-bottom: 22px;
+  // border-bottom: 1px solid #e4e4e4;
+  &.showMore {
+    padding-bottom: 22px;
+  }
+  &-more-icon {
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    bottom: -13px;
+    transform: translateX(-50%);
+    height: 13px;
+    width: 33px;
+    cursor: pointer;
+    border: 1px #e4e4e4 solid;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    text-align: center;
+    line-height: 13px;
+    color: #999;
+  }
+  .el-form-item {
+    margin-right: 16px;
+  }
+  // 表单
+  &-field {
+    // flex: 1;
+    height: 32px;
+    // padding: 0 6px 0px;
+    overflow: hidden;
+    transition: height 0.3s;
+    &.showMore {
+      height: auto;
+      // padding-bottom: 8px;
+    }
+  }
+  // 按钮
+  &-btns {
+    gap: 10px;
+    display: flex;
+    flex-grow: 0;
+    /*
+     * 与字段行的下边距取同一个变量：整个搜索栏是 align-items: center，
+     * 只改字段不跟着改按钮，按钮会相对控件下移半格（校验收紧时最常见）。
+     */
+    padding-bottom: var(--x-form-item-mb, 18px);
+    margin-right: 10px;
+    flex: 1;
+    button {
+      margin: 0 !important;
+    }
+    &-wrapper {
+      display: flex;
+      gap: 10px;
+    }
+    &-after {
+      display: flex;
+      padding-bottom: var(--x-form-item-mb, 18px);
+      gap: 10px;
+    }
+    .x-search-form-btn-reset {
+      background-color: var(--el-color-primary-light-8);
+      color: var(--el-color-primary);
+    }
+  }
+  .x-search-form-default {
+    padding-bottom: 18px;
+  }
+}

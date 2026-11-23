@@ -1,0 +1,221 @@
+// LoadingProgress 组件样式
+.loading-progress-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  backdrop-filter: blur(4px);
+}
+
+.loading-progress-modal {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 40px 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+  min-width: 400px;
+  max-width: 600px;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.15);
+  animation: fadeInScale 0.3s ease-out;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.loading-progress-title {
+  font-family:
+    'Alibaba PuHuiTi 2.0',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 1em;
+  text-align: center;
+  color: #20262d;
+  margin: 0;
+}
+
+.loading-progress-container {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  gap: 16px;
+  width: 100%;
+  max-width: 571px;
+  margin: 0 auto;
+}
+
+.loading-progress-track {
+  position: relative;
+  width: 100%;
+  max-width: 571px;
+  height: 16px;
+  background: #e5e7eb;
+  border-radius: 20px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.loading-progress-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: linear-gradient(90deg, #77a2d4 0%, #1c62a1 100%);
+  border-radius: 20px;
+  transition: width 0.3s ease-out;
+  overflow: hidden;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.loading-progress-shimmer {
+  position: absolute;
+  top: -16px;
+  left: 0;
+  width: 100%;
+  height: 47px;
+  display: flex;
+  align-items: center;
+  gap: -12px;
+  animation: shimmerMove 2s ease-in-out infinite;
+  overflow: hidden;
+}
+
+.loading-progress-dot {
+  width: 35px;
+  height: 47px;
+  background: rgba(119, 162, 212, 0.6);
+  border-radius: 4px;
+  opacity: 0.8;
+  animation: dotPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes shimmerMove {
+  0%,
+  100% {
+    transform: translateX(-20px);
+  }
+  50% {
+    transform: translateX(20px);
+  }
+}
+
+@keyframes dotPulse {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scaleY(0.8);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scaleY(1.2);
+  }
+}
+
+.loading-progress-border {
+  position: absolute;
+  top: 0;
+  left: 1px;
+  width: calc(100% - 2px);
+  height: 100%;
+  border: 1px solid rgba(189, 202, 246, 0.3);
+  border-radius: 20px;
+  pointer-events: none;
+}
+
+.loading-progress-text {
+  font-family:
+    'Alibaba PuHuiTi 2.0',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1em;
+  text-align: center;
+  color: #757f8c;
+  margin: 0;
+}
+
+// 响应式适配
+@media (max-width: 768px) {
+  .loading-progress-modal {
+    margin: 20px;
+    padding: 32px 40px;
+    gap: 32px;
+    min-width: auto;
+    max-width: calc(100vw - 40px);
+  }
+
+  .loading-progress-title {
+    font-size: 24px;
+  }
+
+  .loading-progress-track {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .loading-progress-shimmer {
+    gap: -8px;
+  }
+
+  .loading-progress-dot {
+    width: 28px;
+    height: 38px;
+  }
+}
+
+// 暗色主题支持
+@media (prefers-color-scheme: dark) {
+  .loading-progress-overlay {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+
+  .loading-progress-modal {
+    background: #ffffff;
+    color: #20262d;
+  }
+
+  .loading-progress-title {
+    color: #20262d;
+  }
+
+  .loading-progress-text {
+    color: #a0a0a0;
+  }
+
+  .loading-progress-track {
+    background: #4a5568;
+  }
+
+  .loading-progress-fill {
+    background: linear-gradient(90deg, #4299e1 0%, #2b6cb0 100%);
+  }
+
+  .loading-progress-dot {
+    background: #63b3ed;
+  }
+}

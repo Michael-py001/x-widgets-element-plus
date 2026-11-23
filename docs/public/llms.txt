@@ -1,0 +1,31 @@
+# x-widgets-element-plus
+
+> Vue 3 form, table, and business widgets built on Element Plus 2.
+
+- Package: `x-widgets-element-plus` (MIT)
+- Runtime: Vue 3.5+ and Element Plus 2.11+.
+- Install: `npm install x-widgets-element-plus vue element-plus @element-plus/icons-vue`
+- Styles: `element-plus/dist/index.css` and `x-widgets-element-plus/style.css`.
+- Public API: named exports from the package root; internal source paths are not a stable API.
+
+## Read first
+
+- [Getting started](./guide)
+- [Exported components](./components)
+- [Controls](./components/controls)
+- [Schema forms](./components/forms)
+- [Table and virtualization](./components/table)
+- [AreaCascader](./components/area-cascader)
+- [LoadingProgress](./components/loading-progress)
+- [Cross-library compatibility](./components/compatibility)
+- [AI guide](./ai)
+- Agent skill (repository source): `.agents/skills/x-widgets-element-plus/SKILL.md`
+- Agent skill (published with docs): `./agents/skills/x-widgets-element-plus/SKILL.md`
+
+## Grounding rules
+
+- Host applications own API requests, domain models, and passed-in form/table data.
+- Use `ColumnForFormItemType` and `FormModelBlock` for schema-driven forms; `SearchForm` uses a flat column list.
+- `Table` and `TableVirtualized` are different rendering contracts; do not infer that `TableColumn` works with V2.
+- `AreaCascader` uses built-in data by default and accepts `treeData`; its `change` event emits the normalized path array.
+- Do not assume parity with the Ant Design Vue package or invent undocumented props.

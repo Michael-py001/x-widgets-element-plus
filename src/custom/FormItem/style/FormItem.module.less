@@ -1,0 +1,72 @@
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.around {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.text-unit-left {
+  margin-right: 8px;
+  margin-bottom: 24px;
+}
+.text-unit-right {
+  margin-left: 8px;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+// .line {
+//   display: flex;
+//   align-items: center;
+//   .main {
+//     flex: 1;
+//     flex-grow: 1;
+//     align-items: center;
+//   }
+// }
+
+.x-form-item {
+  :global {
+    /*
+     * 字段行下方预留的空间，默认 18px，给校验错误提示留位。
+     * 搜索栏通常不做校验，可用 `.x-search-form { --x-form-item-mb: 0 }` 单独关掉；
+     * SearchForm 的按钮区 padding 读同一个变量，关掉后按钮与控件仍能对齐。
+     */
+    .el-form-item {
+      margin-bottom: var(--x-form-item-mb, 18px) !important;
+    }
+    .autoLabelHeight {
+      ::v-deep(.el-form-item__label) {
+        height: fit-content;
+        white-space: pre-wrap;
+      }
+      .el-form-item__label {
+        height: fit-content;
+        white-space: pre-wrap;
+      }
+    }
+    .hideRequiredMark.el-form-item {
+      &.is-required {
+        label::before {
+          display: none !important;
+        }
+      }
+    }
+    .addRequiredMark.el-form-item {
+      label::before {
+        color: var(--el-color-danger);
+        content: '*';
+        margin-right: 4px;
+      }
+    }
+    .formSlotStyle {
+      .el-form-item__control-inner {
+        flex: 1;
+        display: inline-block;
+      }
+    }
+  }
+}

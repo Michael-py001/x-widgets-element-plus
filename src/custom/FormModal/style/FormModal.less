@@ -1,0 +1,20 @@
+/**
+ * FormModal 的外层容器不生成盒子，因此不参与父级 flex / grid 布局。
+ *
+ * 这个组件只需要挂载一个弹窗：内部 ElDialog 的遮罩 `.el-overlay` 是 `position: fixed`，
+ * 未展开时又是 `display: none`，两种状态都不占文档流。真正会占位的是外层这个
+ * `<div class="x-form-modal">` —— 弹窗关闭时它依然生成一个高度为 0 的真实盒子。
+ * 一旦组件落在带间距的 flex / grid 容器里，这个 0 高度的 flex item 仍会占掉一份间距，把页面凭空撑高，
+ * 使上方按可用高度计算的表格溢出、冒出多余的页面滚动条。
+ *
+ * `display: contents` 让容器自身不生成盒子、子节点直接上提，语义恰好等于「透明的包装层」，
+ * 优于另外两种改法：`v-show` 在弹窗展开时容器会重新生成盒子、把间距加回来（背后内容抖动）；
+ * `v-if` 会改变 ElDialog 的挂载时机，影响调用方对 `ref` 上 `resetFields` / `validate` 的使用。
+ *
+ * 类名带 `x-` 前缀，与仓库其它 widget 的根类名保持一致（`x-confirm-popup`、
+ * `x-formpage-container`、`x-search-form-btns`），避免 `FormModal` 这类通用名与业务页面
+ * 自定义类名撞车。
+ */
+.x-form-modal {
+  display: contents;
+}
