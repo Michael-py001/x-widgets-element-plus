@@ -1,6 +1,6 @@
 # x-widgets-element-plus
 
-> 基于 Element Plus 2 构建的 Vue 3 表单、表格与业务组件。
+> 基于 Element Plus 2 的 Vue 3 表单组件库，提供类型化 Schema 表单与业务控件。
 
 - 包名：`x-widgets-element-plus`（MIT）
 - 运行环境：Vue 3.5+ 与 Element Plus 2.11+。

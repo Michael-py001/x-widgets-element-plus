@@ -1,19 +1,19 @@
-# Installation & setup
+# 安装与配置
 
-## Requirements
+## 环境要求
 
-| Dependency | Supported line | Notes |
+| 依赖 | 支持版本 | 说明 |
 | --- | --- | --- |
-| Node.js | 18+ | For the consuming app's toolchain; use an active LTS release. |
-| Vue | 3.5+ | Peer dependency. |
-| Element Plus | 2.11+ | Peer dependency; load its stylesheet separately. |
-| `@element-plus/icons-vue` | 2.3+ | Peer dependency used by the schema form controls. |
+| Node.js | 18+ | 用于消费方应用的工具链；请使用仍在维护的 LTS 版本。 |
+| Vue | 3.5+ | peer 依赖（同级依赖）。 |
+| Element Plus | 2.11+ | peer 依赖；需单独加载其样式表。 |
+| `@element-plus/icons-vue` | 2.3+ | schema 表单控件使用的 peer 依赖。 |
 
 ```sh
 npm install x-widgets-element-plus vue element-plus @element-plus/icons-vue
 ```
 
-## Global registration
+## 全局注册
 
 ```ts
 import { createApp } from 'vue'
@@ -26,11 +26,11 @@ import App from './App.vue'
 createApp(App).use(ElementPlus).use(XWidgets).mount('#app')
 ```
 
-Import framework CSS before or alongside package CSS from one application entry. This package does not install Element Plus or apply your application theme automatically.
+请在同一个应用入口中先加载框架 CSS，或与本包 CSS 一并加载。本包不会替你安装 Element Plus，也不会自动套用你的应用主题。
 
-## Selective registration
+## 按需注册
 
-Import only names present in the [public export catalog](/components/). Use the package root; internal source paths are not a public API.
+只导入[公开导出清单](/components/)中存在的名称。请使用包根目录导入；内部源码路径不属于公开 API。
 
 ```ts
 import { createApp } from 'vue'
@@ -45,21 +45,21 @@ createApp(App)
   .mount('#app')
 ```
 
-## Peer dependencies and browser features
+## Peer 依赖与浏览器特性
 
-- Vue and Element Plus are peers; the host application owns their version and plugin configuration.
-- `AreaCascader` ships built-in administrative-area data and can receive a custom tree through `treeData`.
-- Table virtualization, DOM sizing, and file controls require browser rendering. Keep those interactions within client-rendered pages when using SSR.
-- The package does not depend on application-specific aliases or request services. Load data in the host application and pass it as props.
+- Vue 与 Element Plus 均为 peer 依赖；其版本与插件配置由宿主应用负责。
+- `AreaCascader` 内置中国行政区划数据，也可通过 `treeData` 接收自定义树。
+- 表格虚拟滚动、DOM 尺寸计算与文件控件依赖浏览器渲染。使用 SSR 时，请将这些交互限制在客户端渲染的页面中。
+- 本包不依赖任何特定应用的 API 别名或请求服务。请在宿主应用加载业务数据，再通过 props 传入。
 
-## Package scripts
+## 包脚本
 
 ```sh
-npm run docs:dev       # local documentation server
-npm run docs:build     # production documentation build
-npm run docs:preview   # preview the generated site
+npm run docs:dev       # 本地文档服务器
+npm run docs:build     # 生产环境文档构建
+npm run docs:preview   # 预览生成的站点
 npm run typecheck
 npm test
-npm run build          # ESM, CJS, CSS, declarations
+npm run build          # ESM、CJS、CSS、类型声明
 npm pack --dry-run
 ```

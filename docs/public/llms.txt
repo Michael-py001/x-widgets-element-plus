@@ -1,6 +1,6 @@
 # x-widgets-element-plus
 
-> Vue 3 form, table, and business widgets built on Element Plus 2.
+> Vue 3 form component library with typed schema-driven forms and business widgets based on Element Plus 2.
 
 - Package: `x-widgets-element-plus` (MIT)
 - Runtime: Vue 3.5+ and Element Plus 2.11+.

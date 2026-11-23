@@ -1,10 +1,10 @@
-# Dialogs, tags & tooltips
+# 弹窗、标签与提示
 
-This page documents the public contracts of `ConfirmPopup`, `customConfirm` (with `CustomConfirmOptions` and `ConfirmCancelStatus`), `Tag`, and `CustomTooltip`. All names are imported from `x-widgets-element-plus`; internal source paths are not a stable API.
+本页说明 `ConfirmPopup`、`customConfirm`（含 `CustomConfirmOptions` 与 `ConfirmCancelStatus`）、`Tag` 和 `CustomTooltip` 的公开契约。所有名称均从 `x-widgets-element-plus` 导入；内部源码路径不属于稳定 API。
 
 ## ConfirmPopup
 
-A controlled confirmation dialog built on Element Plus `ElDialog`. Visibility is driven by the `show` prop (`v-model:show` is supported).
+基于 Element Plus `ElDialog` 的受控确认弹窗。显示状态由 `show` prop 驱动（支持 `v-model:show`）。
 
 ```vue
 <script setup lang="ts">
@@ -16,110 +16,110 @@ const loading = ref(false)
 
 function onConfirm() {
   loading.value = true
-  // perform the work, then set loading = false and visible = false
+  // 执行操作，完成后设置 loading = false 与 visible = false
 }
 </script>
 
 <template>
   <ConfirmPopup
     v-model:show="visible"
-    title="Delete record"
-    confirm-text="Delete"
+    title="删除记录"
+    confirm-text="删除"
     type="danger"
     :ok-btn-loading="loading"
     @confirm="onConfirm"
   >
-    <p>This action cannot be undone.</p>
+    <p>此操作不可撤销。</p>
   </ConfirmPopup>
 </template>
 ```
 
 ### Props
 
-| Prop | Type | Default | Purpose |
+| Prop | 类型 | 默认值 | 用途 |
 | --- | --- | --- | --- |
-| `show` | `boolean` | `false` | Dialog visibility; `update:show` is emitted on cancel/close. |
-| `title` | `string` | `标题` | Header text when the `header` slot is not used. |
-| `width` | `string \| number` | `500px` | Dialog width (Element Plus `width`). |
-| `type` | `primary \| success \| warning \| danger` | `primary` | Confirm button type. |
-| `confirmText` | `string` | `确认` | Confirm button label. |
-| `cancelText` | `string` | `取消` | Cancel button label. |
-| `showConfirmBtn` | `boolean` | `true` | Show the confirm button. |
-| `showCancelBtn` | `boolean` | `true` | Show the cancel button. |
-| `okBtnLoading` | `boolean` | `false` | Loading state; also disables both footer buttons. |
-| `disabled` | `boolean` | `false` | Disables the confirm button. |
-| `closable` | `boolean` | `true` | Shows the dialog close (X) control. |
-| `footer` | `boolean` | `true` | When `false`, no default footer is rendered. |
+| `show` | `boolean` | `false` | 弹窗显示状态；取消/关闭时派发 `update:show`。 |
+| `title` | `string` | `标题` | 未使用 `header` 插槽时的标题文字。 |
+| `width` | `string \| number` | `500px` | 弹窗宽度（Element Plus `width`）。 |
+| `type` | `primary \| success \| warning \| danger` | `primary` | 确认按钮类型。 |
+| `confirmText` | `string` | `确认` | 确认按钮文字。 |
+| `cancelText` | `string` | `取消` | 取消按钮文字。 |
+| `showConfirmBtn` | `boolean` | `true` | 是否显示确认按钮。 |
+| `showCancelBtn` | `boolean` | `true` | 是否显示取消按钮。 |
+| `okBtnLoading` | `boolean` | `false` | 加载状态；同时禁用两个底部按钮。 |
+| `disabled` | `boolean` | `false` | 禁用确认按钮。 |
+| `closable` | `boolean` | `true` | 是否显示关闭（X）控件。 |
+| `footer` | `boolean` | `true` | 为 `false` 时不渲染默认底部区域。 |
 
-### Events
+### 事件
 
-| Event | Payload | When |
+| 事件 | 载荷 | 触发时机 |
 | --- | --- | --- |
-| `confirm` | none | Confirm button clicked. The component does **not** close itself; set `show = false` in the host. |
-| `cancel` | none | Cancel button clicked or dialog closed. |
-| `update:show` | `false` | Emitted alongside `cancel`; enables `v-model:show`. |
-| `update:formData` | — | Declared in `emits` but not emitted by the current implementation; do not rely on it. |
+| `confirm` | 无 | 点击确认按钮。组件**不会**自行关闭；请在宿主中设置 `show = false`。 |
+| `cancel` | 无 | 点击取消按钮或弹窗关闭。 |
+| `update:show` | `false` | 与 `cancel` 同时派发，用于支持 `v-model:show`。 |
+| `update:formData` | — | 在 `emits` 中声明但当前实现未派发；请勿依赖。 |
 
-### Slots
+### 插槽
 
-| Slot | Slot props | Purpose |
+| 插槽 | 插槽属性 | 用途 |
 | --- | --- | --- |
-| `header` | `{ close, titleId, titleClass }` | Replaces the default `title` header. |
-| `default` | — | Dialog body. |
-| `footer` | `{ clickCancel }` | Replaces the default cancel/confirm buttons. |
+| `header` | `{ close, titleId, titleClass }` | 替换默认 `title` 标题。 |
+| `default` | — | 弹窗正文。 |
+| `footer` | `{ clickCancel }` | 替换默认取消/确认按钮。 |
 
-`closeOnClickModal` is disabled, so clicking the mask does not close the dialog; closing happens through the X control, the cancel button, or a host-driven `show` change.
+`closeOnClickModal` 已禁用，点击遮罩不会关闭弹窗；关闭仅通过 X 控件、取消按钮，或宿主修改 `show` 实现。
 
-## customConfirm, CustomConfirmOptions, ConfirmCancelStatus
+## customConfirm、CustomConfirmOptions、ConfirmCancelStatus
 
-`customConfirm` is an imperative confirm dialog. It mounts a modal to `document.body` and returns a `Promise<boolean>`; it is browser-only. `CustomConfirmOptions` is the options type and `ConfirmCancelStatus` is the rejection value used when the user cancels.
+`customConfirm` 是命令式确认弹窗。它向 `document.body` 挂载一个模态框，并返回 `Promise<boolean>`；仅可在浏览器环境使用。`CustomConfirmOptions` 为配置类型，`ConfirmCancelStatus` 为用户取消时的拒绝值类型。
 
 ```ts
 import { customConfirm } from 'x-widgets-element-plus'
 
-// Pattern 1: onConfirm callback
+// 方式 1：onConfirm 回调
 customConfirm({
-  message: 'Delete this record?',
+  message: '确定删除这条记录吗？',
   type: 'danger',
   onConfirm: async () => {
     await deleteRecord()
   }
 })
 
-// Pattern 2: .then — async work shows loading automatically
-customConfirm({ message: 'Delete this record?' })
+// 方式 2：.then —— 异步工作会自动显示 loading
+customConfirm({ message: '确定删除这条记录吗？' })
   .then(async () => {
     await deleteRecord()
   })
   .catch((error) => {
-    if (error?.status === 'cancel') return // user cancelled
-    // handle a failed operation
+    if (error?.status === 'cancel') return // 用户取消
+    // 处理操作失败
   })
 ```
 
 ### CustomConfirmOptions
 
-| Field | Type | Default | Purpose |
+| 字段 | 类型 | 默认值 | 用途 |
 | --- | --- | --- | --- |
-| `title` | `string` | `''` | Modal title. |
-| `message` | `string` | — | Body message, rendered as the default slot. |
-| `type` | `primary \| danger` | `primary` | Modal tone/icon. |
-| `confirmText` | `string` | `确定` | Confirm button label. |
-| `cancelText` | `string` | `取消` | Cancel button label. |
-| `showConfirmBtn` | `boolean` | `true` | Show the confirm button. |
-| `showCancelBtn` | `boolean` | `true` | Show the cancel button. |
-| `onConfirm` | `() => Promise<void> \| void` | — | When provided, runs on confirm; an async return keeps loading until it settles. |
+| `title` | `string` | `''` | 模态框标题。 |
+| `message` | `string` | — | 正文消息，渲染到默认插槽。 |
+| `type` | `primary \| danger` | `primary` | 模态框基调/图标。 |
+| `confirmText` | `string` | `确定` | 确认按钮文字。 |
+| `cancelText` | `string` | `取消` | 取消按钮文字。 |
+| `showConfirmBtn` | `boolean` | `true` | 是否显示确认按钮。 |
+| `showCancelBtn` | `boolean` | `true` | 是否显示取消按钮。 |
+| `onConfirm` | `() => Promise<void> \| void` | — | 提供时在确认时执行；返回 Promise 时保持 loading 直到完成。 |
 
-### Return and cancellation
+### 返回值与取消
 
-- Resolves with `true` on confirm.
-- Rejects with `ConfirmCancelStatus` (`{ status: 'cancel' }`) on cancel or close; check `error?.status === 'cancel'` in `.catch`.
-- With `onConfirm`, loading is shown while the callback runs and the modal closes when it resolves. If it throws, loading stops and the confirm state resets so the user can retry.
-- Without `onConfirm`, the first confirm resolves the promise and the `.then` callback runs; an async return automatically shows loading until it settles, and a rejection resets the state for retry.
+- 确认时以 `true` resolve。
+- 取消或关闭时以 `ConfirmCancelStatus`（`{ status: 'cancel' }`）reject；在 `.catch` 中用 `error?.status === 'cancel'` 判断。
+- 使用 `onConfirm` 时，回调执行期间显示 loading，resolve 后关闭弹窗；若抛出异常，loading 停止并重置确认状态，允许重试。
+- 不使用 `onConfirm` 时，首次确认即 resolve promise 并执行 `.then` 回调；返回异步结果时自动显示 loading 直至完成，失败时重置状态以允许重试。
 
 ## Tag
 
-A lightweight status tag. Exported as `Tag`; the component name is `CustomTag`. It can render from the `text` prop or the default slot.
+轻量级状态标签。导出名为 `Tag`，组件名为 `CustomTag`。可通过 `text` prop 或默认插槽渲染内容。
 
 ```vue
 <script setup lang="ts">
@@ -131,39 +131,39 @@ function onClose(event: Event) {
 </script>
 
 <template>
-  <Tag text="Published" type="success" />
-  <Tag text="Failed" status="FAIL" round />
-  <Tag text="Removable" closable @close="onClose" />
+  <Tag text="已发布" type="success" />
+  <Tag text="失败" status="FAIL" round />
+  <Tag text="可移除" closable @close="onClose" />
 </template>
 ```
 
 ### Props
 
-| Prop | Type | Default | Purpose |
+| Prop | 类型 | 默认值 | 用途 |
 | --- | --- | --- | --- |
-| `text` | `string` | `''` | Tag text; used as the native `title` tooltip. |
-| `status` | `string` | `''` | Looks up a style in `statusMap`. |
-| `type` | `success \| warning \| danger \| info \| primary \| default` | `default` | Predefined style type. |
-| `size` | `large \| default \| small` | `default` | Tag size. |
-| `closable` | `boolean` | `false` | Shows a close icon. |
-| `disabled` | `boolean` | `false` | Suppresses the `click` event. |
-| `color` / `backgroundColor` / `borderColor` | `string` | `''` | Direct colors; these override `statusMap` values. |
-| `round` | `boolean` | `false` | Rounded corners. |
-| `className` | `string` | `''` | Extra class name. |
-| `statusMap` | `Record<string, { color?: string; backgroundColor?: string; borderColor?: string }>` | built-in map | Maps `status` values to colors. Defaults include `SUCCESS`, `NO`, `FAIL`, `PASS_NOTICE`, `PASS_WARNING`, `ERROR`, `PRIMARY`. |
+| `text` | `string` | `''` | 标签文字；同时作为原生 `title` 提示。 |
+| `status` | `string` | `''` | 在 `statusMap` 中查找样式。 |
+| `type` | `success \| warning \| danger \| info \| primary \| default` | `default` | 预定义样式类型。 |
+| `size` | `large \| default \| small` | `default` | 标签尺寸。 |
+| `closable` | `boolean` | `false` | 是否显示关闭图标。 |
+| `disabled` | `boolean` | `false` | 为 `true` 时不派发 `click`。 |
+| `color` / `backgroundColor` / `borderColor` | `string` | `''` | 直接设置颜色；优先级高于 `statusMap`。 |
+| `round` | `boolean` | `false` | 圆角标签。 |
+| `className` | `string` | `''` | 额外的样式类名。 |
+| `statusMap` | `Record<string, { color?: string; backgroundColor?: string; borderColor?: string }>` | 内置映射 | 将 `status` 值映射到颜色。默认包含 `SUCCESS`、`NO`、`FAIL`、`PASS_NOTICE`、`PASS_WARNING`、`ERROR`、`PRIMARY`。 |
 
-### Events and behavior
+### 事件与行为
 
-| Event | Payload | When |
+| 事件 | 载荷 | 触发时机 |
 | --- | --- | --- |
-| `click` | `Event` | Tag clicked; not emitted when `disabled`. |
-| `close` | `Event` | Close icon clicked; the event's propagation is stopped. |
+| `click` | `Event` | 点击标签；`disabled` 时不派发。 |
+| `close` | `Event` | 点击关闭图标；会阻止事件冒泡。 |
 
-The `default` slot supplies tag content; when `text` is absent, its plain text is extracted for the native `title` tooltip. The component renders nothing when neither `text` nor the default slot is provided.
+`default` 插槽提供标签内容；当未传 `text` 时，会提取插槽纯文本作为原生 `title` 提示。当 `text` 与默认插槽均未提供时，组件不渲染任何内容。
 
 ## CustomTooltip
 
-`CustomTooltip` is a function component wrapping Element Plus `ElTooltip`, intended for table cells. Its options type is `CustomTooltipProps`, exported from the package root.
+`CustomTooltip` 是基于 Element Plus `ElTooltip` 的函数式组件，用于表格单元格。其属性类型 `CustomTooltipProps` 从包根目录导出。
 
 ```vue
 <script setup lang="ts">
@@ -172,27 +172,27 @@ import { CustomTooltip } from 'x-widgets-element-plus'
 
 <template>
   <CustomTooltip :content="['Alpha', 'Beta', 'Gamma']" separator=" | " />
-  <CustomTooltip content="A long value that will be truncated in the cell" />
+  <CustomTooltip content="在单元格中会被截断的长文本" />
 </template>
 ```
 
-| Prop | Type | Default | Purpose |
+| Prop | 类型 | 默认值 | 用途 |
 | --- | --- | --- | --- |
-| `content` | `string \| any[]` | required | Value to display; an array renders one line per item in the tooltip. |
-| `separator` | `string` | `;` | Joins array items in the cell text. |
-| `emptyText` | `string` | `-` | Shown for empty content. |
-| `placement` | Element Plus tooltip placement | `top` | Tooltip position. |
-| `maxWidth` | `string` | `600px` | Tooltip content max width. |
-| `maxHeight` | `string` | `400px` | Tooltip content max height (enables scrolling). |
-| `cellStyle` | `CSSProperties` | `{}` | Cell element style; default applies ellipsis truncation. |
-| `tooltipStyle` | `CSSProperties` | `{}` | Tooltip content style. |
-| `formatter` | `(item: any, index: number) => string \| number` | — | Formats each array item for both cell and tooltip. |
+| `content` | `string \| any[]` | 必填 | 要显示的内容；数组时提示框中每项一行。 |
+| `separator` | `string` | `;` | 单元格文字中连接数组项的分隔符。 |
+| `emptyText` | `string` | `-` | 内容为空时显示。 |
+| `placement` | Element Plus tooltip 位置 | `top` | 提示框位置。 |
+| `maxWidth` | `string` | `600px` | 提示内容最大宽度。 |
+| `maxHeight` | `string` | `400px` | 提示内容最大高度（可滚动）。 |
+| `cellStyle` | `CSSProperties` | `{}` | 单元格样式；默认启用省略号截断。 |
+| `tooltipStyle` | `CSSProperties` | `{}` | 提示内容样式。 |
+| `formatter` | `(item: any, index: number) => string \| number` | — | 格式化每个数组项，用于单元格与提示框。 |
 
-For array content, the cell shows items joined by `separator` and the tooltip lists them line by line. For string content, the cell truncates with ellipsis and the tooltip shows the full text. Empty content renders `emptyText` with no tooltip.
+数组内容时，单元格用 `separator` 连接各项，提示框逐行列出。字符串内容时，单元格以省略号截断，提示框显示完整文本。内容为空时渲染 `emptyText`，且不显示提示框。
 
-## Related pages
+## 相关页面
 
-- [Exported components](/components/)
-- [Utility & type exports](/components/exports)
+- [导出的组件](/components/)
+- [工具与类型导出](/components/exports)
 - [AreaCascader](/components/area-cascader)
-- [Cross-library compatibility](/components/compatibility)
+- [跨库兼容性](/components/compatibility)

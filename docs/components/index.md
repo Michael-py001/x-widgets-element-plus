@@ -1,18 +1,18 @@
-# Exported components
+# 导出的组件
 
-This catalog follows the package-root exports in `src/components.ts`. Import from `x-widgets-element-plus`; deep source paths are not stable public API.
+本清单对应 `src/components.ts` 中包根目录的导出。请从 `x-widgets-element-plus` 导入；内部源码路径不属于稳定的公开 API。
 
-## Controls
+## 基础控件
 
-`Autocomplete`, `AreaPicker`, `Cascader`, `Checkbox`, `CheckboxGroup`, `CityPicker`, `ColorPicker`, `DatePicker`, `Input`, `InputNumber`, `InputPassword`, `InputSearch`, `Mentions`, `RadioGroup`, `RangeInput`, `Rate`, `Select`, `SelectOption`, `Slider`, `Switch`, `TimePicker`, `TreeSelect`, `Table`, `TableVirtualized`, `Textarea`, and `Text`.
+`Autocomplete`、`AreaPicker`、`Cascader`、`Checkbox`、`CheckboxGroup`、`CityPicker`、`ColorPicker`、`DatePicker`、`Input`、`InputNumber`、`InputPassword`、`InputSearch`、`Mentions`、`RadioGroup`、`RangeInput`、`Rate`、`Select`、`SelectOption`、`Slider`、`Switch`、`TimePicker`、`TreeSelect`、`Table`、`TableVirtualized`、`Textarea` 和 `Text`。
 
-## Business widgets
+## 业务组件
 
-`ConfirmPopup`, `CustomForm`, `CustomFormItem`, `FormModal`, `FormPage`, `SearchForm`, `Tag`, `AreaCascader`, `LoadingProgress`, and `LoadingProgressService`.
+`ConfirmPopup`、`CustomForm`、`CustomFormItem`、`FormModal`、`FormPage`、`SearchForm`、`Tag`、`AreaCascader`、`LoadingProgress` 和 `LoadingProgressService`。
 
-`CustomTooltip` is exported from the root through the tooltip module. The root also re-exports `customConfirm` (with `CustomConfirmOptions` and `ConfirmCancelStatus`), and AreaCascader data/normalization helpers including `CITY_SELF_LEVEL`, `PRIORITY_PROVINCES`, `chinaAreaVersion`, `getChinaAreaData`, `setChinaAreaData`, `clipAreaTree`, `sortPriorityProvinces`, `AreaNode`, `AreaMaxLevel`, `AreaMinSelectLevel`, `BuildAreaOptionsConfig`, `NormalizeAreaPathConfig`, `buildAreaOptions`, `chinaAreaData`, `formatAreaValue`, `injectCitySelfLevel`, `normalizeAreaPath`, and `parseAreaValue`. Their props, events, return values, and behavior are documented in [Dialogs, tags & tooltips](/components/feedback), [AreaCascader](/components/area-cascader), and [Utility & type exports](/components/exports).
+`CustomTooltip` 通过 tooltip 模块从包根目录导出。根目录还重新导出了 `customConfirm`（含 `CustomConfirmOptions` 与 `ConfirmCancelStatus`），以及 AreaCascader 的数据/归一化辅助函数，包括 `CITY_SELF_LEVEL`、`PRIORITY_PROVINCES`、`chinaAreaVersion`、`getChinaAreaData`、`setChinaAreaData`、`clipAreaTree`、`sortPriorityProvinces`、`AreaNode`、`AreaMaxLevel`、`AreaMinSelectLevel`、`BuildAreaOptionsConfig`、`NormalizeAreaPathConfig`、`buildAreaOptions`、`chinaAreaData`、`formatAreaValue`、`injectCitySelfLevel`、`normalizeAreaPath` 和 `parseAreaValue`。其 props、事件、返回值与行为详见[弹窗、标签与提示](/components/feedback)、[AreaCascader](/components/area-cascader)与[工具与类型导出](/components/exports)。
 
-## Common import pattern
+## 常见导入方式
 
 ```ts
 import {
@@ -33,16 +33,16 @@ import type {
 } from 'x-widgets-element-plus'
 ```
 
-## Distinguish the table options
+## 区分两种表格
 
-`Table` is the package's standard table widget and exposes Element Plus table props together with `TableColumn` and the shared pagination options. `TableVirtualized` uses Element Plus Table V2 and is intended for large row counts; its dimensions and cell/column options follow that implementation rather than the standard table. Check the respective exported prop types before switching between them.
+`Table` 是本包的标准表格组件，包含 Element Plus 表格 props、`TableColumn` 以及共享的分页选项。`TableVirtualized` 基于 Element Plus Table V2，面向大行数场景；其尺寸与单元格/列选项遵循 V2 的实现，而非标准表格。在两者之间切换前，请先查看各自导出的 prop 类型。
 
-## Related pages
+## 相关页面
 
-- [Controls](/components/controls)
-- [Schema forms](/components/forms)
-- [Table and virtualization](/components/table)
-- [Dialogs, tags & tooltips](/components/feedback)
+- [基础控件](/components/controls)
+- [Schema 表单](/components/forms)
+- [表格与虚拟滚动](/components/table)
+- [弹窗、标签与提示](/components/feedback)
 - [AreaCascader](/components/area-cascader)
-- [Utility & type exports](/components/exports)
-- [Cross-library compatibility](/components/compatibility)
+- [工具与类型导出](/components/exports)
+- [跨库兼容性](/components/compatibility)

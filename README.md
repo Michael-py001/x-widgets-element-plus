@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/Michael-py001/x-widgets-element-plus/actions/workflows/ci.yml/badge.svg)](https://github.com/Michael-py001/x-widgets-element-plus/actions/workflows/ci.yml) [![Docs](https://img.shields.io/badge/docs-online-blue.svg)](https://michael-py001.github.io/x-widgets-element-plus/) [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
 
-Vue 3 component library built on Element Plus. The package provides Element Plus control adapters and schema-driven form, table, dialog, feedback, and China administrative-area widgets without depending on host-application APIs.
+Vue 3 form component library built on Element Plus 2. The package provides control adapters and typed schema-driven form, table, dialog, feedback, and China administrative-area widgets without depending on host-application APIs.
 
 ## Requirements
 

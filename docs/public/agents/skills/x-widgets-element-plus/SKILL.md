@@ -14,7 +14,7 @@ Use this skill when building or changing Vue UI in an application that uses Elem
 
 ## Read the local contract
 
-Before coding, read these package docs in the user's language. Use `docs/` for English and the matching path under `docs/zh-CN/` for Simplified Chinese (for example, `docs/guide.md` → `docs/zh-CN/guide.md`). Keep component names, prop names, and code identifiers unchanged when explaining the API.
+Before coding, read these package docs in the user's language. Use `docs/` for Simplified Chinese (the default) and `docs/en/` for English (for example, `docs/guide.md` → `docs/en/guide.md`). Keep component names, prop names, and code identifiers unchanged when explaining the API.
 
 1. `docs/guide.md` for setup, peers, and CSS.
 2. `docs/components/index.md` for root exports.

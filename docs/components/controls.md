@@ -1,8 +1,8 @@
-# Controls
+# 基础控件
 
-These are the direct control adapters exported by `x-widgets-element-plus`. They keep Element Plus as the native contract and add the package's form-data bridge where documented.
+以下是 `x-widgets-element-plus` 导出的直接控件适配器。它们以 Element Plus 为原生契约，并在文档明确的地方增加表单数据桥接。
 
-## Import from the package root
+## 从包根目录导入
 
 ```ts
 import {
@@ -34,35 +34,35 @@ import 'element-plus/dist/index.css'
 import 'x-widgets-element-plus/style.css'
 ```
 
-Internal source paths are not a stable API. See [Exported components](/components/) for the complete root catalog.
+内部源码路径不属于稳定 API。完整根入口清单见[导出的组件](/components/)。
 
-## Data-entry adapters
+## 数据录入适配器
 
-| Component | Use it for | Package-specific contract |
+| 组件 | 用途 | 本包契约 |
 | --- | --- | --- |
-| `Input` | Single-line text | Supports direct `v-model`; in a schema, `name`, `formData`, `label`, `props`, and `event` are consumed by the form bridge. |
-| `InputPassword` | Password entry | Element Plus Input with `type="password"`; schema `input-password`. |
-| `InputSearch` | Search entry | Element Plus Input with a search prefix icon; `event.onSearch` runs on Enter; schema `input-search`. |
-| `Textarea` | Multiline text | Uses Element Plus textarea semantics with the same form bridge. |
-| `InputNumber` | Numeric values | Keeps Element Plus `min`, `max`, `step`, and `precision`. |
-| `Select` | Select one or more values | Uses Element Plus select props and supports the package's schema bridge. |
-| `Cascader` | Multi-level selection | Wraps Element Plus Cascader; schema `options` are normalized; schema `cascader`. |
-| `TreeSelect` | Select a node from a tree | Wraps Element Plus TreeSelect; schema `options` are normalized into native `data`. |
-| `CityPicker` | City-level area selection | Built-in China area data via `AreaCascader` (`maxLevel=2`); schema `city-picker`. |
-| `AreaPicker` | District-level area selection | Built-in China area data via `AreaCascader` (`maxLevel=3`); schema `area-picker`. |
-| `RangeInput` | Two-value range | Two Element Plus inputs joined by a separator; writes a `[start, end]` array; schema `range-input`. |
-| `Rate` | Star rating | Wraps Element Plus Rate; schema `rate`. |
-| `Slider` | Numeric slider | Wraps Element Plus Slider; schema `slider`. |
-| `ColorPicker` | Color selection | Wraps Element Plus ColorPicker; schema `color-picker`. |
-| `Mentions` | `@` mention input | Uses Element Plus `ElMention`; schema `options` are normalized; schema `mentions`. |
-| `DatePicker` | Date or date range | Uses Element Plus date-picker props and supports the package's schema bridge. |
-| `TimePicker` | Time or time range | Uses Element Plus time-picker props; schema `time-range-picker` sets `isRange` automatically. |
-| `RadioGroup` | One value from options | `options` accepts arrays, readonly arrays, `Ref`, and `ComputedRef`; `labelKey` and `valueKey` customize fields. |
-| `Checkbox` | Single boolean toggle | Wraps Element Plus checkbox; schema `checkbox` writes a boolean to the field. |
-| `CheckboxGroup` | Multiple values | Uses the same option normalization as `RadioGroup`; the model should be an array. |
-| `Switch` | Single boolean toggle | Wraps Element Plus switch; schema `switch` writes a boolean to the field. |
-| `Autocomplete` | Candidate selection | Local options are filtered by `labelKey`; `valueKey` follows Element Plus semantics. A supplied `fetchSuggestions` callback takes precedence. |
-| `Text` | Read-only display | `textValue` can be a value or formatter; it never writes back to the form model. |
+| `Input` | 单行文本 | 直接使用时支持 `v-model`；在 Schema 中，`name`、`formData`、`label`、`props` 和 `event` 由表单桥接消费。 |
+| `InputPassword` | 密码输入 | Element Plus Input 固定 `type="password"`；Schema 值 `input-password`。 |
+| `InputSearch` | 搜索输入 | Element Plus Input 带搜索前缀图标；回车触发 `event.onSearch`；Schema 值 `input-search`。 |
+| `Textarea` | 多行文本 | 使用 Element Plus textarea 语义，并支持同样的表单桥接。 |
+| `InputNumber` | 数值 | 保留 Element Plus 的 `min`、`max`、`step` 和 `precision`。 |
+| `Select` | 单选或多选 | 使用 Element Plus Select 属性，并支持本包的 Schema 桥接。 |
+| `Cascader` | 多级级联选择 | 包装 Element Plus Cascader；Schema 的 `options` 会归一化；Schema 值 `cascader`。 |
+| `TreeSelect` | 从树中选择节点 | 包装 Element Plus TreeSelect；Schema 的 `options` 会归一化为原生 `data`。 |
+| `CityPicker` | 市级地区选择 | 通过 `AreaCascader` 使用内置行政区数据（`maxLevel=2`）；Schema 值 `city-picker`。 |
+| `AreaPicker` | 区级地区选择 | 通过 `AreaCascader` 使用内置行政区数据（`maxLevel=3`）；Schema 值 `area-picker`。 |
+| `RangeInput` | 双值区间 | 两个 Element Plus Input 由分隔符连接；写入 `[start, end]` 数组；Schema 值 `range-input`。 |
+| `Rate` | 星级评分 | 包装 Element Plus Rate；Schema 值 `rate`。 |
+| `Slider` | 数值滑块 | 包装 Element Plus Slider；Schema 值 `slider`。 |
+| `ColorPicker` | 颜色选择 | 包装 Element Plus ColorPicker；Schema 值 `color-picker`。 |
+| `Mentions` | `@` 提及输入 | 基于 Element Plus `ElMention`；Schema 的 `options` 会归一化；Schema 值 `mentions`。 |
+| `DatePicker` | 日期或日期范围 | 使用 Element Plus DatePicker 属性，并支持本包的 Schema 桥接。 |
+| `TimePicker` | 时间或时间范围 | 使用 Element Plus TimePicker 属性；Schema 的 `time-range-picker` 会自动设置 `isRange`。 |
+| `RadioGroup` | 单值选项 | `options` 支持数组、只读数组、`Ref` 和 `ComputedRef`；可用 `labelKey`、`valueKey` 指定字段。 |
+| `Checkbox` | 单个布尔切换 | 包装 Element Plus Checkbox；Schema 的 `checkbox` 会把布尔值写入字段。 |
+| `CheckboxGroup` | 多值选项 | 使用与 `RadioGroup` 相同的选项归一化，模型值应为数组。 |
+| `Switch` | 单个布尔切换 | 包装 Element Plus Switch；Schema 的 `switch` 会把布尔值写入字段。 |
+| `Autocomplete` | 候选选择 | 本地选项按 `labelKey` 过滤，`valueKey` 遵循 Element Plus 语义；传入 `fetchSuggestions` 时优先使用该回调。 |
+| `Text` | 只读展示 | `textValue` 可以是值或格式化函数，不会写回表单模型。 |
 
 ```vue
 <script setup lang="ts">
@@ -81,17 +81,17 @@ const names = [{ label: 'Alpha', value: 'alpha' }, { label: 'Beta', value: 'beta
 </template>
 ```
 
-The host application owns options, requests, loading state, permissions, and side effects. These adapters do not fetch domain data for you.
+宿主应用负责选项、请求、loading、权限和副作用。这些适配器不会替你请求业务数据。
 
-## Interactive example
+## 交互示例
 
-The controls below use local reactive state; change the keyword or availability to see the displayed result update.
+下面的控件使用本地响应式状态；修改关键词或启用状态，可以看到展示结果随之更新。
 
 <ClientOnly><ElementControlDemo /></ClientOnly>
 
-## Schema bridge
+## Schema 桥接
 
-Use `ColumnForFormItemType` and `FormModelBlock` when fields are rendered through `FormPage`, `FormModal`, or `SearchForm`:
+通过 `FormPage`、`FormModal` 或 `SearchForm` 渲染字段时，使用 `ColumnForFormItemType` 与 `FormModelBlock`：
 
 ```ts
 const formModel: FormModelBlock[] = [
@@ -113,13 +113,13 @@ const formModel: FormModelBlock[] = [
 ]
 ```
 
-Do not add a second `v-model` to a schema-managed field. Use `formSlot` when a custom control still needs the label, field path, and validation container. See [Schema forms](/components/forms) for the complete rules.
+Schema 管理的字段不要再传第二个 `v-model`。如果自定义控件仍需保留标签、字段路径和校验容器，请使用 `formSlot`。完整规则见[Schema 表单](/components/forms)。
 
-## Native and package boundaries
+## 原生与本包边界
 
-- Element Plus props and events remain the source of truth for native behavior.
-- `Table` and `TableVirtualized` are separate contracts; `TableColumn` is for the standard table, not Table V2.
-- `DatePicker` and `Select` are package-root exports and schema adapters; their native props follow Element Plus.
-- `AreaCascader` is a package export with built-in data and an explicit `treeData` override; see its dedicated reference. `CityPicker` and `AreaPicker` are fixed-level schema adapters over it.
-- `Mentions` follows Element Plus `ElMention` (the component export name); its native `props` field keeps ElMention's option-alias meaning, not the form-bridge meaning.
-- If a prop is absent from the generated declarations and these docs, do not invent it.
+- 原生行为以 Element Plus props 与事件为准。
+- `Table` 与 `TableVirtualized` 是两套不同契约；`TableColumn` 只适用于普通表格，不适用于 Table V2。
+- `DatePicker` 与 `Select` 是包根目录导出和 Schema 适配器；原生属性遵循 Element Plus 契约。
+- `AreaCascader` 是公开导出，默认带内置数据，也支持显式 `treeData`；详见独立参考页。`CityPicker` 与 `AreaPicker` 是基于它的固定层级 Schema 适配器。
+- `Mentions` 对应 Element Plus 的 `ElMention`（组件导出名）；其原生 `props` 字段保留 ElMention 的选项别名含义，而非表单桥接含义。
+- 生成声明和本文档中没有的 prop 不要自行臆造。

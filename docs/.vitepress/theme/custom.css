@@ -1,10 +1,36 @@
 :root {
   --vp-home-hero-name-background: none;
   --vp-home-hero-name-color: var(--vp-c-brand-1);
+  --vp-nav-logo-height: 30px;
+}
+
+/* 语言下拉菜单必须能溢出导航栏：VitePress 的 .content 默认 overflow:auto 会把菜单裁掉。 */
+.VPNavBar .content {
+  overflow: visible !important;
+}
+
+.VPNavBarTranslations .menu,
+.VPNavBarAppearance .menu {
+  z-index: 100 !important;
+}
+
+.VPLogo .logo,
+.VPNavBarTitle .logo {
+  border-radius: 7px;
 }
 
 .VPHome .VPFeature {
   align-self: start;
+}
+
+.VPHome .VPHero.has-image .image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.VPHome .VPHero.has-image .image-bg {
+  display: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

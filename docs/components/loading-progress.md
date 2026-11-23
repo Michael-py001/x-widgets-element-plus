@@ -1,55 +1,55 @@
 # LoadingProgress
 
-`LoadingProgress` renders a determinate progress overlay. `LoadingProgressService` creates and manages overlays imperatively. Import both from the package root:
+`LoadingProgress` 渲染可确定进度的遮罩层；`LoadingProgressService` 以命令式方式创建和管理遮罩。两个 API 都从包根目录导入：
 
 ```ts
 import { LoadingProgress, LoadingProgressService } from 'x-widgets-element-plus'
 ```
 
-## Component
+## 组件用法
 
 ```vue
 <LoadingProgress
   v-model:visible="visible"
-  title="Importing records"
+  title="正在导入记录"
   :progress="progress"
-  progress-text="Uploading…"
+  progress-text="正在上传…"
   @close="onClose"
 />
 ```
 
-| Prop | Type | Default | Notes |
+| Prop | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `title` | `string` | `正在处理中...` | Heading text. |
-| `progressText` | `string` | `正在处理中，请稍后...` | Text below the bar. |
-| `progress` | `number` | `0` | Percent; rendering is clamped to 0–100. |
-| `visible` | `boolean` | `false` | Controls rendering; supports `v-model:visible`. |
-| `maskClosable` | `boolean` | `false` | Allows closing by clicking the mask or pressing Escape. |
+| `title` | `string` | `正在处理中...` | 标题文字。 |
+| `progressText` | `string` | `正在处理中，请稍后...` | 进度条下方的文字。 |
+| `progress` | `number` | `0` | 百分比；渲染宽度限制在 0–100。 |
+| `visible` | `boolean` | `false` | 控制组件渲染，支持 `v-model:visible`。 |
+| `maskClosable` | `boolean` | `false` | 是否允许点击遮罩或按 Escape 关闭。 |
 
-It emits `update:visible(false)` and `close` when closed. The component is browser-only because it registers a document-level keyboard listener after mounting.
+关闭时派发 `update:visible(false)` 与 `close`。组件在挂载后会注册 document 级键盘监听，因此仅用于浏览器环境。
 
-## Service
+## 服务用法
 
-`show(options)` returns an instance immediately. Update it as the real task reports progress and close it in `finally`:
+`show(options)` 会立即返回实例。请根据实际任务进度更新状态，并在 `finally` 中关闭：
 
 ```ts
-const progress = LoadingProgressService.show({ title: 'Importing records' })
+const progress = LoadingProgressService.show({ title: '正在导入记录' })
 
 try {
   await importRecords((percent) => progress.update({ progress: percent }))
-  progress.update({ progress: 100, progressText: 'Import complete' })
+  progress.update({ progress: 100, progressText: '导入完成' })
 } finally {
   progress.close()
 }
 ```
 
-`LoadingProgressOptions` supports `title`, `progressText`, `progress`, `onClose`, and `duration` (automatic close in milliseconds). `LoadingProgressInstance` provides `update(partialOptions)`, `close()`, and `destroy()`; `closeAll()` removes every service-created overlay.
+`LoadingProgressOptions` 支持 `title`、`progressText`、`progress`、`onClose` 和 `duration`（自动关闭毫秒数）。`LoadingProgressInstance` 提供 `update(partialOptions)`、`close()` 与 `destroy()`；`closeAll()` 会移除服务创建的全部遮罩。
 
-| Method | Behavior |
+| 方法 | 行为 |
 | --- | --- |
-| `show(options)` | Create an overlay and return its instance. |
-| `progress(title, options)` | Convenience alias for creating an overlay; its promise resolves immediately with the instance, not when the task finishes. |
-| `autoProgress(title, options)` | Advance a timer-based animation over `duration` (default 3000 ms) using `steps` (default 100). This is simulated progress, not a measurement of task completion. |
-| `closeAll()` | Close every overlay created by the service. |
+| `show(options)` | 创建遮罩并立即返回实例。 |
+| `progress(title, options)` | 创建遮罩的便捷方法；Promise 立即以实例 resolve，不代表任务已完成。 |
+| `autoProgress(title, options)` | 按计时器推进动画，`duration` 默认 3000 毫秒，`steps` 默认 100。这是模拟进度，不代表实际任务完成度。 |
+| `closeAll()` | 关闭服务创建的所有遮罩。 |
 
-The service appends Vue roots to `document.body`; call it only in a browser interaction or lifecycle. Closing the overlay does not cancel the work being tracked. For real work, update progress from the task and close the instance when the task completes or fails.
+服务会向 `document.body` 添加 Vue 根节点，因此应在浏览器交互或生命周期中调用。关闭遮罩不会取消正在跟踪的任务。真实任务请根据其进度更新组件，并在成功或失败后关闭实例。
