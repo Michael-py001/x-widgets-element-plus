@@ -109,6 +109,18 @@ Switch between "multi-column / split / inline": the same field contract renders 
 
 <ClientOnly><ElementAdvancedDemo /></ClientOnly>
 
+### Real-page case
+
+Three composables from real pages, reduced to one interactive demo that shows schema bridging in production scenarios:
+
+1. **Project management · list query** (`useBasicProjectSearchForm`): a two-column (`colspan=12`) query form; submitting filters the table from the same `formData`.
+2. **Create / edit modal** (`useBasicProjectFormModal`): detail, edit and create share one `formModel`; detail mode only flips `disabled`.
+3. **Cost workbench · inline inputs** (`useGeneralCostEditForm`): `colspan` has no effect in an `inline` layout; a `formSlot` render function turns a field into a click-to-upload box.
+
+Try searching, creating a project, then editing or viewing its details to see one field contract reused across all three scenarios.
+
+<ClientOnly><ElementRealCaseDemo /></ClientOnly>
+
 ## Schema bridge
 
 Use `ColumnForFormItemType` and `FormModelBlock` when fields are rendered through `FormPage`, `FormModal`, or `SearchForm`:
