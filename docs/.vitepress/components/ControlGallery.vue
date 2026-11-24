@@ -2,7 +2,7 @@
 /**
  * 控件画廊：一份 column schema 渲染多种表单控件。
  *
- * 不是逐个组件 import 后各绑 v-model，而是把 20+ 种控件写进同一份 schema，
+ * 不是逐个组件 import 后各绑 v-model，而是把 18 种控件写进同一份 schema，
  * 交给 FormPage 桥接渲染；所有值写进同一个 formData，下方实时展示模型。
  * 覆盖控件类型均来自 x-widgets-element-plus 已支持的 Schema 值。
  */
@@ -79,7 +79,7 @@ const entries = computed(() => Object.entries(formData).map(([key, value]) => ({
   <div class="gallery" data-ui>
     <div class="gallery__head">
       <span class="tag">控件画廊</span>
-      <p>一份 <code>column</code> schema 渲染 <b>20+ 种控件</b>，全部由 <code>FormPage</code> 桥接到同一个 <code>formData</code>。试着修改任意字段，下方模型实时同步。</p>
+      <p>一份 <code>column</code> schema 渲染 <b>18 种控件</b>，全部由 <code>FormPage</code> 桥接到同一个 <code>formData</code>。试着修改任意字段，下方模型实时同步。</p>
     </div>
 
     <FormPage :form-model="model" :form-data="formData" layout="horizontal" label-width="92px" />
