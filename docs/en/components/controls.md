@@ -97,9 +97,17 @@ The host application owns options, requests, loading state, permissions, and sid
 
 ## Interactive example
 
-The controls below use local reactive state; change the keyword or availability to see the displayed result update.
+### Basic usage
+
+Each control is imported from the package root and bound to local state through its own `v-model`. Change any control and the "Live form state" panel updates; "Reset state" returns to the initial values.
 
 <ClientOnly><ElementControlDemo /></ClientOnly>
+
+### Advanced usage
+
+One field `schema` renders a query form and applies its conditions to a local data table on submit. Try a title keyword, a state, or a minimum rating, then click "Search"; in production, swap the renderer for `SearchForm`.
+
+<ClientOnly><ElementAdvancedDemo /></ClientOnly>
 
 ## Schema bridge
 

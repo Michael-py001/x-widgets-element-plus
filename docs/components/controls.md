@@ -97,9 +97,17 @@ const names = [{ label: 'Alpha', value: 'alpha' }, { label: 'Beta', value: 'beta
 
 ## 交互示例
 
-下面的控件使用本地响应式状态；修改关键词或启用状态，可以看到展示结果随之更新。
+### 基础用法
+
+直接通过包根目录导入控件，用各自的 `v-model` 绑定到本地状态。修改任意控件，右侧的「实时表单状态」会同步更新；点击「重置状态」可回到初始值。
 
 <ClientOnly><ElementControlDemo /></ClientOnly>
+
+### 进阶用法
+
+一份字段 `schema` 同时渲染出查询表单，并在提交后把条件应用到本地数据表格。试试输入标题关键词、切换状态或设置最低评分，再点击「查询」；生产项目可把这里的渲染器换成 `SearchForm`。
+
+<ClientOnly><ElementAdvancedDemo /></ClientOnly>
 
 ## Schema 桥接
 
