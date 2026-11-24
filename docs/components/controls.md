@@ -18,6 +18,8 @@ import {
   InputNumber,
   InputPassword,
   InputSearch,
+  InputOtp,
+  InputTag,
   Mentions,
   RadioGroup,
   RangeInput,
@@ -26,6 +28,8 @@ import {
   Slider,
   Switch,
   Text,
+  Segmented,
+  TimeSelect,
   Textarea,
   TimePicker,
   Transfer,
@@ -67,6 +71,10 @@ import 'x-widgets-element-plus/style.css'
 | `Transfer` | 穿梭框 | 包装 Element Plus Transfer；Schema 的 `options` 归一化为原生 `data`，选中值走 `modelValue`；Schema 值 `transfer`。 |
 | `Upload` | 文件上传 | 包装 Element Plus Upload；受控值是 `fileList`（非 `value`/`modelValue`）；Schema 值 `upload`。 |
 | `Text` | 只读展示 | `textValue` 可以是值或格式化函数，不会写回表单模型。 |
+| `Segmented` | 分段控制器 | 包装 Element Plus Segmented；Schema 的 `options` 即候选项；Schema 值 `segmented`。 |
+| `InputOtp` | 一次性密码输入 | 包装 Element Plus InputOtp；`modelValue` 保存验证码；Schema 值 `input-otp`。 |
+| `InputTag` | 标签输入 | 包装 Element Plus InputTag；`modelValue` 保存标签数组；Schema 值 `input-tag`。 |
+| `TimeSelect` | 固定间隔时间选择 | 包装 Element Plus TimeSelect；Schema 值 `time-select`。 |
 
 ```vue
 <script setup lang="ts">

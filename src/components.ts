@@ -24,6 +24,10 @@ export { default as ColorPicker } from './element-ui/ColorPicker';
 export { default as Mentions } from './element-ui/Mentions';
 export { default as Transfer } from './element-ui/Transfer';
 export { default as Upload } from './element-ui/Upload';
+export { default as Segmented } from './element-ui/Segmented';
+export { default as InputOtp } from './element-ui/InputOtp';
+export { default as InputTag } from './element-ui/InputTag';
+export { default as TimeSelect } from './element-ui/TimeSelect';
 
 export { default as CustomForm } from './custom/Form';
 export type {

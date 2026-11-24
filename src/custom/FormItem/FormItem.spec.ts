@@ -477,6 +477,59 @@ describe('FormItem textarea support', () => {
     expect(formData.files).toEqual(fileList);
   });
 
+  it('renders segmented fields and syncs the selected value', async () => {
+    const formData = reactive({ mode: 'a' });
+    const options = [
+      { label: 'A', value: 'a' },
+      { label: 'B', value: 'b' }
+    ];
+    const wrapper = mount(FormItem, {
+      props: { label: 'Mode', name: 'mode', type: 'segmented', formData, options }
+    });
+    const control = wrapper.findComponent({ name: 'ElSegmented' });
+
+    expect(control.exists()).toBe(true);
+    expect(control.props('options')).toEqual(options);
+    await control.vm.$emit('update:modelValue', 'b');
+    expect(formData.mode).toBe('b');
+  });
+
+  it('renders input-otp fields and syncs the code', async () => {
+    const formData = reactive({ code: '' });
+    const wrapper = mount(FormItem, {
+      props: { label: 'Code', name: 'code', type: 'input-otp', formData }
+    });
+    const control = wrapper.findComponent({ name: 'ElInputOtp' });
+
+    expect(control.exists()).toBe(true);
+    await control.vm.$emit('update:modelValue', '123456');
+    expect(formData.code).toBe('123456');
+  });
+
+  it('renders input-tag fields and syncs the tags', async () => {
+    const formData = reactive({ tags: [] as string[] });
+    const wrapper = mount(FormItem, {
+      props: { label: 'Tags', name: 'tags', type: 'input-tag', formData }
+    });
+    const control = wrapper.findComponent({ name: 'ElInputTag' });
+
+    expect(control.exists()).toBe(true);
+    await control.vm.$emit('update:modelValue', ['a', 'b']);
+    expect(formData.tags).toEqual(['a', 'b']);
+  });
+
+  it('renders time-select fields and syncs the time', async () => {
+    const formData = reactive({ at: '' });
+    const wrapper = mount(FormItem, {
+      props: { label: 'At', name: 'at', type: 'time-select', formData }
+    });
+    const control = wrapper.findComponent({ name: 'ElTimeSelect' });
+
+    expect(control.exists()).toBe(true);
+    await control.vm.$emit('update:modelValue', '09:00');
+    expect(formData.at).toBe('09:00');
+  });
+
   it('renders autocomplete fields, writes valueKey to formData, and keeps related-field events', async () => {
     const formData = reactive({
       name: '',

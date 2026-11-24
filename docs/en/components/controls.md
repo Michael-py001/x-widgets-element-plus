@@ -18,6 +18,8 @@ import {
   InputNumber,
   InputPassword,
   InputSearch,
+  InputOtp,
+  InputTag,
   Mentions,
   RadioGroup,
   RangeInput,
@@ -26,6 +28,8 @@ import {
   Slider,
   Switch,
   Text,
+  Segmented,
+  TimeSelect,
   Textarea,
   TimePicker,
   Transfer,
@@ -67,6 +71,10 @@ Internal source paths are not a stable API. See [Exported components](/en/compon
 | `Transfer` | Transfer list | Wraps Element Plus Transfer; schema `options` are normalized into native `data`, selected keys use `modelValue`; schema `transfer`. |
 | `Upload` | File upload | Wraps Element Plus Upload; the controlled value is `fileList` (not `value`/`modelValue`); schema `upload`. |
 | `Text` | Read-only display | `textValue` can be a value or formatter; it never writes back to the form model. |
+| `Segmented` | Segmented control | Wraps Element Plus Segmented; schema `options` are the candidates; schema `segmented`. |
+| `InputOtp` | One-time password | Wraps Element Plus InputOtp; `modelValue` holds the code; schema `input-otp`. |
+| `InputTag` | Tag input | Wraps Element Plus InputTag; `modelValue` holds the tag array; schema `input-tag`. |
+| `TimeSelect` | Fixed-interval time select | Wraps Element Plus TimeSelect; schema `time-select`. |
 
 ```vue
 <script setup lang="ts">

@@ -56,7 +56,15 @@ export type formItemTypes =
   | 'x-transfer'
   | 'transfer'
   | 'x-upload'
-  | 'upload';
+  | 'upload'
+  | 'x-segmented'
+  | 'segmented'
+  | 'x-input-otp'
+  | 'input-otp'
+  | 'x-input-tag'
+  | 'input-tag'
+  | 'x-time-select'
+  | 'time-select';
 
 /**
  * 表单字段名路径。

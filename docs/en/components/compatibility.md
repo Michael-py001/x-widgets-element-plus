@@ -13,9 +13,12 @@ Both packages have root exports for `Input`, `InputNumber`, `RadioGroup`, `Check
 | Form schema | `SearchForm.column[]`; `FormPage` / `FormModal.formModel[]` blocks. Render-function slots and `display` / `required` field support are typed. | `column[]` field schemas with Ant Design Vue control props and slot names; see the package-specific field type. |
 | Standard table | Element Plus table; schema uses `TableColumn` and `data`. Includes a separate `TableVirtualized` export. | Ant Design Vue table; uses upstream `TableProps`, including its columns and `dataSource` convention. |
 | Cascading area | `AreaCascader` with built-in data, custom `treeData`, and `path`/`joined` model values. | `AreaPicker` and `CityPicker` form-item integrations. |
-| Shared form controls | `Input`, `InputPassword`, `InputSearch`, `Textarea`, `InputNumber`, `Select`, `TreeSelect`, `RadioGroup`, `Checkbox`, `CheckboxGroup`, `Switch`, `DatePicker`, `RangePicker`, `TimePicker`, `TimeRangePicker`, `Autocomplete`, `Cascader`, `Rate`, `Slider`, `Mentions`, `Transfer`, `Upload`, `CityPicker`, `AreaPicker`, `RangeInput`, `Text`; schema `type` accepts both bare names and `x-` aliases. | The same controls (including `transfer` and `upload`); AntD spells the autocomplete export `AutoComplete`. |
+| Shared form controls | `Input`, `InputPassword`, `InputSearch`, `Textarea`, `InputNumber`, `Select`, `TreeSelect`, `RadioGroup`, `Checkbox`, `CheckboxGroup`, `Switch`, `DatePicker`, `RangePicker`, `TimePicker`, `TimeRangePicker`, `Autocomplete`, `Cascader`, `Rate`, `Slider`, `Mentions`, `Transfer`, `Upload`, `Segmented`, `CityPicker`, `AreaPicker`, `RangeInput`, `Text`; schema `type` accepts both bare names and `x-` aliases. | The same controls (including `transfer` and `upload`); AntD spells the autocomplete export `AutoComplete`. |
 | Distinctive exports | `Autocomplete`, `Text`, `TableVirtualized`, `AreaCascader`, `LoadingProgress`, `LoadingProgressService`, `CustomTooltip`, `customConfirm`, `ColorPicker`. | `AutoComplete`, Ant Design Vue's broad control re-exports, `FunctionButton`, `GoBack`, `TabPage`, `DropdownButtonList`. |
 | Framework-only control | `ColorPicker` (available from Element Plus upstream; Ant Design Vue 4 has no equivalent). | No `ColorPicker`; do not declare `color-picker` in this package's schema. |
+
+
+Element Plus additionally offers `input-otp`, `input-tag`, and `time-select` form controls (from its upstream; Ant Design Vue 4 has no equivalents). Check these explicitly when porting schemas; do not assume interchangeability.
 
 ## Migration checklist
 

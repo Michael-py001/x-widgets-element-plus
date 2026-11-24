@@ -44,6 +44,10 @@ import ColorPicker from '../../element-ui/ColorPicker';
 import Mentions from '../../element-ui/Mentions';
 import Transfer from '../../element-ui/Transfer';
 import Upload from '../../element-ui/Upload';
+import Segmented from '../../element-ui/Segmented';
+import InputOtp from '../../element-ui/InputOtp';
+import InputTag from '../../element-ui/InputTag';
+import TimeSelect from '../../element-ui/TimeSelect';
 import dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn';
 dayjs.locale('zh-cn');
@@ -225,7 +229,15 @@ const FormItemComponent = defineComponent({
       'x-transfer': Transfer,
       transfer: Transfer,
       'x-upload': Upload,
-      upload: Upload
+      upload: Upload,
+      'x-segmented': Segmented,
+      segmented: Segmented,
+      'x-input-otp': InputOtp,
+      'input-otp': InputOtp,
+      'x-input-tag': InputTag,
+      'input-tag': InputTag,
+      'x-time-select': TimeSelect,
+      'time-select': TimeSelect
     };
     const cityPicker: Ref<HTMLElement | null> = ref(null);
 

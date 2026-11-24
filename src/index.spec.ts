@@ -7,6 +7,8 @@ import XWidgets, {
   Checkbox,
   CityPicker,
   ColorPicker,
+  InputOtp,
+  InputTag,
   CustomTooltip,
   DatePicker,
   InputPassword,
@@ -15,10 +17,12 @@ import XWidgets, {
   Mentions,
   RangeInput,
   Rate,
+  Segmented,
   Select,
   Slider,
   Switch,
   TimePicker,
+  TimeSelect,
   Transfer,
   Upload,
   Table,
@@ -54,5 +58,9 @@ describe('XWidgets plugin', () => {
     expect(app.component('XMentions')).toBe(Mentions);
     expect(app.component('XTransfer')).toBe(Transfer);
     expect(app.component('XUpload')).toBe(Upload);
+    expect(app.component('XSegmented')).toBe(Segmented);
+    expect(app.component('XInputOtp')).toBe(InputOtp);
+    expect(app.component('XInputTag')).toBe(InputTag);
+    expect(app.component('XTimeSelect')).toBe(TimeSelect);
   });
 });
