@@ -1,161 +1,106 @@
 <script setup lang="ts">
-import { computed, reactive } from 'vue'
-import {
-  Input,
-  InputNumber,
-  Select,
-  RadioGroup,
-  Segmented,
-  Checkbox,
-  Switch,
-  Rate,
-  Slider,
-  Tag,
-} from 'x-widgets-element-plus'
+import { computed, reactive, ref } from 'vue'
+import { SearchForm, Tag } from 'x-widgets-element-plus'
+import type { ColumnForFormItemType } from 'x-widgets-element-plus'
 import 'element-plus/dist/index.css'
 
 /**
- * 组件展示台：每个控件从包根目录导入，使用真实 v-model 绑定到本地状态。
- * 控件按数据录入 / 选择 / 开关确认 / 反馈比例分组，右侧读数随操作实时更新。
+ * 基础用法：用一份 ColumnForFormItemType schema 驱动 SearchForm，
+ * 字段不各自绑 v-model，而是把值写进同一个 formData。提交后驱动下方结果表。
+ * 这是本包 Schema 桥接的核心：字段定义一次，查询与展示共用同一份契约。
  */
-const initial = {
-  keyword: '',
-  amount: 12,
-  status: 'draft',
-  mode: 'list',
-  notify: true,
-  agreed: false,
-  rating: 4,
-  progress: 60,
+const filters = reactive({ projectName: '', ownerUnit: '', projectType: '' })
+
+const columns: ColumnForFormItemType[] = [
+  { name: 'projectName', label: '项目名称', el: 'input', colspan: 12,
+    props: { clearable: true, placeholder: '输入项目名称' } },
+  { name: 'ownerUnit', label: '业主单位', el: 'input', colspan: 12,
+    props: { clearable: true, placeholder: '输入业主单位' } },
+  { name: 'projectType', label: '项目类型', el: 'select', colspan: 12,
+    options: [
+      { label: '全部', value: '' },
+      { label: '燃机', value: 'gas' },
+      { label: '输电', value: 'grid' },
+      { label: '海风', value: 'offshore' },
+    ],
+    props: { clearable: true } },
+]
+
+const records = [
+  { key: '1', projectName: '燃机造价分析', ownerUnit: '华东院', projectType: 'gas', stage: '已发布' },
+  { key: '2', projectName: '特高压线路评估', ownerUnit: '国网设计院', projectType: 'grid', stage: '草稿' },
+  { key: '3', projectName: '近海风电场测算', ownerUnit: '中广核', projectType: 'offshore', stage: '已发布' },
+  { key: '4', projectName: '燃机改扩建估算', ownerUnit: '华能', projectType: 'gas', stage: '已归档' },
+]
+
+const applied = ref({ ...filters })
+const runs = ref(1)
+const result = computed(() => records.filter((r) =>
+  (!applied.value.projectName || r.projectName.includes(applied.value.projectName)) &&
+  (!applied.value.ownerUnit || r.ownerUnit.includes(applied.value.ownerUnit)) &&
+  (!applied.value.projectType || r.projectType === applied.value.projectType)
+))
+
+function onSearch(values: typeof filters): void {
+  applied.value = { ...values }
+  runs.value += 1
 }
-const model = reactive({ ...initial })
-
-const statusOptions = [
-  { label: '草稿', value: 'draft' },
-  { label: '已发布', value: 'published' },
-  { label: '已归档', value: 'archived' },
-]
-const modeOptions = [
-  { label: '列表', value: 'list' },
-  { label: '网格', value: 'grid' },
-]
-
-const flags = computed(() => [
-  { label: '通知', on: model.notify },
-  { label: '已确认', on: model.agreed },
-])
-
-function reset(): void {
-  Object.assign(model, initial)
+function onReset(values: typeof filters): void {
+  applied.value = { ...values }
+  runs.value += 1
 }
 </script>
 
 <template>
-  <div class="showcase" data-ui>
-    <div class="showcase__grid">
-      <section class="demo-group">
-        <h3 class="demo-group__title">数据录入</h3>
-        <div class="demo-group__body">
-          <label class="field">
-            <span>文本输入 <code>Input</code></span>
-            <Input v-model="model.keyword" placeholder="输入关键字" clearable />
-          </label>
-          <label class="field">
-            <span>数字输入 <code>InputNumber</code></span>
-            <InputNumber v-model="model.amount" :min="0" :max="999" />
-          </label>
-        </div>
-      </section>
-
-      <section class="demo-group">
-        <h3 class="demo-group__title">选择</h3>
-        <div class="demo-group__body">
-          <label class="field">
-            <span>下拉选择 <code>Select</code></span>
-            <Select v-model="model.status" :options="statusOptions" />
-          </label>
-          <label class="field">
-            <span>分段控制 <code>Segmented</code></span>
-            <Segmented v-model="model.mode" :options="modeOptions" />
-          </label>
-          <label class="field">
-            <span>单选组 <code>RadioGroup</code></span>
-            <RadioGroup v-model="model.status" :options="statusOptions" />
-          </label>
-        </div>
-      </section>
-
-      <section class="demo-group">
-        <h3 class="demo-group__title">开关与确认</h3>
-        <div class="demo-group__body">
-          <label class="field field--inline">
-            <span>开关 <code>Switch</code></span>
-            <Switch v-model="model.notify" />
-          </label>
-          <label class="field field--inline">
-            <span>复选框 <code>Checkbox</code></span>
-            <Checkbox v-model="model.agreed">我已阅读</Checkbox>
-          </label>
-        </div>
-      </section>
-
-      <section class="demo-group">
-        <h3 class="demo-group__title">反馈与比例</h3>
-        <div class="demo-group__body">
-          <label class="field field--inline">
-            <span>评分 <code>Rate</code></span>
-            <Rate v-model="model.rating" />
-          </label>
-          <label class="field">
-            <span>滑块 <code>Slider</code></span>
-            <Slider v-model="model.progress" />
-          </label>
-        </div>
-      </section>
+  <div class="schema-demo" data-ui>
+    <div class="schema-demo__head">
+      <span class="tag">基础用法</span>
+      <p>字段只写一次 <code>column</code> schema，由 <code>SearchForm</code> 渲染成查询表单（<code>colspan=12</code> 两列）；值统一写入 <code>formData</code>。试着填写后点「查询」。</p>
     </div>
 
-    <aside class="readout">
-      <h3 class="readout__title">实时表单状态</h3>
-      <dl class="readout__list">
-        <div><dt>关键字</dt><dd>{{ model.keyword || '—' }}</dd></div>
-        <div><dt>数量</dt><dd>{{ model.amount }}</dd></div>
-        <div><dt>状态</dt><dd><Tag :text="model.status" type="primary" /></dd></div>
-        <div><dt>视图</dt><dd>{{ model.mode }}</dd></div>
-        <div><dt>评分</dt><dd>{{ model.rating }} / 5</dd></div>
-        <div><dt>进度</dt><dd>{{ model.progress }}%</dd></div>
-      </dl>
-      <div class="readout__flags">
-        <Tag
-          v-for="f in flags"
-          :key="f.label"
-          :text="`${f.label}：${f.on ? '开' : '关'}`"
-          :type="f.on ? 'success' : 'info'"
-        />
+    <SearchForm
+      :column="columns"
+      :form-data="filters"
+      layout="horizontal"
+      label-width="90px"
+      @search="onSearch"
+      @reset="onReset"
+    />
+
+    <div class="result">
+      <div class="result__head">
+        <strong>查询结果</strong>
+        <span>{{ result.length }} 条 · 第 {{ runs }} 次查询</span>
       </div>
-      <button class="readout__reset" type="button" @click="reset">重置状态</button>
-    </aside>
+      <table>
+        <thead><tr><th>项目名称</th><th>业主单位</th><th>类型</th><th>状态</th></tr></thead>
+        <tbody>
+          <tr v-for="row in result" :key="row.key">
+            <td>{{ row.projectName }}</td>
+            <td>{{ row.ownerUnit }}</td>
+            <td>{{ row.projectType }}</td>
+            <td><Tag :text="row.stage" :type="row.stage === '已发布' ? 'success' : row.stage === '草稿' ? 'primary' : 'info'" /></td>
+          </tr>
+          <tr v-if="result.length === 0"><td colspan="4" class="empty">没有匹配的记录</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
 <style scoped>
-.showcase { display:grid; grid-template-columns:minmax(0,1fr) 280px; gap:14px; align-items:start; }
-.showcase__grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
-.demo-group,.readout { border:1px solid var(--vp-c-divider); border-radius:10px; padding:18px; background:var(--vp-c-bg-soft); }
-.demo-group__title,.readout__title { margin:0 0 14px; font-size:15px; font-weight:600; color:var(--vp-c-text-1); }
-.demo-group__body { display:flex; flex-direction:column; gap:14px; }
-.field { display:flex; flex-direction:column; gap:6px; }
-.field--inline { flex-direction:row; align-items:center; justify-content:space-between; gap:12px; }
-.field > span { font-size:13px; color:var(--vp-c-text-2); }
-.field code { font-size:12px; color:var(--vp-c-brand-1); }
-.field :deep(.el-input),.field :deep(.el-select),.field :deep(.el-input-number),.field :deep(.el-radio-group) { width:100%; }
-.field :deep(.el-radio-group) { flex-wrap:wrap; row-gap:6px; }
-.readout__list { margin:0; display:flex; flex-direction:column; gap:10px; }
-.readout__list > div { display:flex; justify-content:space-between; align-items:center; gap:12px; }
-.readout__list dt { font-size:13px; color:var(--vp-c-text-2); }
-.readout__list dd { margin:0; font-size:13px; font-weight:600; color:var(--vp-c-text-1); text-align:right; }
-.readout__flags { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; padding:14px; background:var(--vp-c-bg); border-radius:8px; }
-.readout__reset { margin-top:16px; width:100%; padding:9px 14px; border:1px solid var(--vp-c-brand-1); border-radius:6px; background:transparent; color:var(--vp-c-brand-1); font-size:14px; cursor:pointer; }
-.readout__reset:hover { background:var(--vp-c-brand-soft); }
-@media (max-width:960px){ .showcase{grid-template-columns:1fr;} }
-@media (max-width:640px){ .showcase__grid{grid-template-columns:1fr;} .field--inline{flex-wrap:wrap;} }
+.schema-demo { border:1px solid var(--vp-c-divider); border-radius:10px; padding:18px; background:var(--vp-c-bg-soft); display:flex; flex-direction:column; gap:16px; }
+.schema-demo__head { display:flex; align-items:flex-start; gap:12px; }
+.tag { flex:none; font-size:12px; font-weight:600; color:var(--vp-c-brand-1); background:var(--vp-c-bg); border-radius:6px; padding:4px 8px; }
+.schema-demo__head p { margin:0; font-size:13px; color:var(--vp-c-text-2); line-height:1.5; }
+.schema-demo__head code { font-size:12px; color:var(--vp-c-text-1); }
+.result { padding:16px; background:var(--vp-c-bg); border-radius:8px; }
+.result__head { display:flex; justify-content:space-between; align-items:baseline; gap:12px; margin-bottom:10px; }
+.result__head strong { font-size:14px; }
+.result__head span { font-size:12px; color:var(--vp-c-text-2); }
+table { width:100%; border-collapse:collapse; font-size:13px; }
+th,td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--vp-c-divider); }
+th { color:var(--vp-c-text-2); font-weight:600; }
+td.empty { text-align:center; color:var(--vp-c-text-2); }
+@media (max-width:640px){ th,td { padding:6px; font-size:12px; } }
 </style>

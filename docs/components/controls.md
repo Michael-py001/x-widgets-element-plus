@@ -99,13 +99,13 @@ const names = [{ label: 'Alpha', value: 'alpha' }, { label: 'Beta', value: 'beta
 
 ### 基础用法
 
-直接通过包根目录导入控件，用各自的 `v-model` 绑定到本地状态。修改任意控件，右侧的「实时表单状态」会同步更新；点击「重置状态」可回到初始值。
+一份 `column` schema 交给 `SearchForm` 渲染成查询表单（`colspan=12` 两列），字段值统一写进同一个 `formData`；提交后过滤下方结果。试着填写项目名称、业主单位或项目类型，再点「查询」。
 
 <ClientOnly><ElementControlDemo /></ClientOnly>
 
 ### 进阶用法
 
-一份字段 `schema` 同时渲染出查询表单，并在提交后把条件应用到本地数据表格。试试输入标题关键词、切换状态或设置最低评分，再点击「查询」；生产项目可把这里的渲染器换成 `SearchForm`。
+来自真实页面简化的编辑表单：`formModel` 多区块、`colspan` 两列布局与 `fieldsetStyle` 左右分栏，以及字段级 `formSlot` / `beforeSlot` 渲染函数插槽。点击「工程附件」输入框可体验插槽交互，提交后查看收集到的 `formData`。
 
 <ClientOnly><ElementAdvancedDemo /></ClientOnly>
 

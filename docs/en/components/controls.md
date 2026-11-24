@@ -99,13 +99,13 @@ The host application owns options, requests, loading state, permissions, and sid
 
 ### Basic usage
 
-Each control is imported from the package root and bound to local state through its own `v-model`. Change any control and the "Live form state" panel updates; "Reset state" returns to the initial values.
+One `column` schema is rendered by `SearchForm` into a query form (`colspan=12`, two columns); all field values write into a single `formData` object, then filter the results below. Try a project name, owner, or type, then click "Search".
 
 <ClientOnly><ElementControlDemo /></ClientOnly>
 
 ### Advanced usage
 
-One field `schema` renders a query form and applies its conditions to a local data table on submit. Try a title keyword, a state, or a minimum rating, then click "Search"; in production, swap the renderer for `SearchForm`.
+An edit form simplified from a real page: `formModel` blocks, `colspan` two-column layout, `fieldsetStyle` split columns, and field-level `formSlot` / `beforeSlot` render-function slots. Click the "Attachment" field to try the slot, then submit to inspect the collected `formData`.
 
 <ClientOnly><ElementAdvancedDemo /></ClientOnly>
 
