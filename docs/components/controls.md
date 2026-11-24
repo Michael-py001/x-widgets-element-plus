@@ -105,7 +105,7 @@ const names = [{ label: 'Alpha', value: 'alpha' }, { label: 'Beta', value: 'beta
 
 ### 进阶用法
 
-来自真实页面简化的编辑表单：`formModel` 多区块、`colspan` 两列布局与 `fieldsetStyle` 左右分栏，以及字段级 `formSlot` / `beforeSlot` 渲染函数插槽。点击「工程附件」输入框可体验插槽交互，提交后查看收集到的 `formData`。
+切换「多列布局 / 左右布局 / 行内布局」，同一份字段契约会用不同方式渲染：多列用 `colspan`，左右用 `fieldsetStyle` 分栏，行内用 `SearchForm`。插槽同时演示 `formSlot` 渲染函数、`beforeSlot`/`afterSlot` 前后缀和字符串 `slot`。点击「工程附件」可体验插槽交互。
 
 <ClientOnly><ElementAdvancedDemo /></ClientOnly>
 

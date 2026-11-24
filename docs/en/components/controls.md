@@ -105,7 +105,7 @@ One `column` schema is rendered by `SearchForm` into a query form (`colspan=12`,
 
 ### Advanced usage
 
-An edit form simplified from a real page: `formModel` blocks, `colspan` two-column layout, `fieldsetStyle` split columns, and field-level `formSlot` / `beforeSlot` render-function slots. Click the "Attachment" field to try the slot, then submit to inspect the collected `formData`.
+Switch between "multi-column / split / inline": the same field contract renders three ways — `colspan` grid, `fieldsetStyle` split columns, and an inline `SearchForm`. Slots cover `formSlot` render functions, `beforeSlot`/`afterSlot` affixes, and a named string `slot`. Click "Attachment" to try the slot.
 
 <ClientOnly><ElementAdvancedDemo /></ClientOnly>
 
