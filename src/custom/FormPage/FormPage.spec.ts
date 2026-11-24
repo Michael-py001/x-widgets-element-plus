@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { reactive } from 'vue';
+import { h, reactive } from 'vue';
 import { mount } from '@vue/test-utils';
 import FormPage from './FormPage';
 import type { FormModelBlock } from './types/props';
@@ -86,5 +86,28 @@ describe('FormPage options 归一', () => {
     const { xSelect } = mountStatusSelect({ name: 'status' });
 
     expect(xSelect.props('options')).toEqual([]);
+  });
+
+  it('renders a field slot render callback returning a VNode', () => {
+    const formData = reactive({ title: '' });
+    let receivedContext: Record<string, any> | null = null;
+    const formModel: FormModelBlock[] = [
+      {
+        column: [
+          {
+            label: 'Title',
+            name: 'title',
+            slot: (ctx: Record<string, any>) => {
+              receivedContext = ctx;
+              return h('strong', { class: 'slot-vnode' }, `Custom:${ctx.item.label}`);
+            }
+          } as ColumnForFormItemType
+        ]
+      }
+    ];
+    const wrapper = mount(FormPage, { props: { formModel, formData } });
+
+    expect(wrapper.find('strong.slot-vnode').text()).toBe('Custom:Title');
+    expect(receivedContext).toMatchObject({ formData, item: { name: 'title' } });
   });
 });

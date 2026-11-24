@@ -1,8 +1,25 @@
-import { reactive } from 'vue';
+import { h, reactive } from 'vue';
 import { mount } from '@vue/test-utils';
 import { ElCascader } from 'element-plus';
 import { describe, expect, it } from 'vitest';
 import FormItem from './FormItem';
+
+describe('CustomFormItem', () => {
+  it('renders a VNode returned by a formSlot callback with field context', () => {
+    const formData = reactive({ title: 'Record' });
+    const wrapper = mount(FormItem, {
+      props: {
+        name: 'title',
+        label: 'Title',
+        formData,
+        formSlot: ({ name, label, formData: slotFormData }) =>
+          h('strong', `${label}:${name}:${slotFormData.title}`)
+      }
+    });
+
+    expect(wrapper.find('strong').text()).toBe('Title:title:Record');
+  });
+});
 
 describe('FormItem textarea support', () => {
   it('renders textarea fields and syncs value back to formData', async () => {
