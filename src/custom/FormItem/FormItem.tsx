@@ -42,6 +42,8 @@ import Rate from '../../element-ui/Rate';
 import Slider from '../../element-ui/Slider';
 import ColorPicker from '../../element-ui/ColorPicker';
 import Mentions from '../../element-ui/Mentions';
+import Transfer from '../../element-ui/Transfer';
+import Upload from '../../element-ui/Upload';
 import dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn';
 dayjs.locale('zh-cn');
@@ -169,34 +171,61 @@ const FormItemComponent = defineComponent({
     });
     //组件视图
     const widgetMap: Record<string, any> = {
+      'x-text': Text,
+      text: Text,
       'x-input': Input,
       input: Input,
+      'x-textarea': Textarea,
       textarea: Textarea,
-      text: Text,
+      'x-input-number': InputNumber,
       'input-number': InputNumber,
       'x-select': Select,
       select: Select,
+      'x-tree-select': TreeSelect,
       'tree-select': TreeSelect,
+      'x-radio-group': RadioGroup,
       'radio-group': RadioGroup,
+      'x-checkbox': Checkbox,
       checkbox: Checkbox,
+      'x-checkbox-group': CheckboxGroup,
       'checkbox-group': CheckboxGroup,
+      'x-switch': Switch,
       switch: Switch,
+      'x-date-picker': DatePicker,
       'date-picker': DatePicker,
+      'x-range-picker': DatePicker,
       'range-picker': DatePicker,
+      'x-time-picker': TimePicker,
       'time-picker': TimePicker,
+      'x-time-range-picker': TimePicker,
       'time-range-picker': TimePicker,
+      'x-autocomplete': Autocomplete,
       autocomplete: Autocomplete,
       'auto-complete': Autocomplete,
+      'x-input-password': InputPassword,
       'input-password': InputPassword,
+      'x-input-search': InputSearch,
       'input-search': InputSearch,
+      'x-city-picker': CityPicker,
       'city-picker': CityPicker,
+      'x-area-picker': AreaPicker,
       'area-picker': AreaPicker,
+      'x-range-input': RangeInput,
       'range-input': RangeInput,
+      'x-cascader': Cascader,
       cascader: Cascader,
+      'x-rate': Rate,
       rate: Rate,
+      'x-slider': Slider,
       slider: Slider,
+      'x-color-picker': ColorPicker,
       'color-picker': ColorPicker,
-      mentions: Mentions
+      'x-mentions': Mentions,
+      mentions: Mentions,
+      'x-transfer': Transfer,
+      transfer: Transfer,
+      'x-upload': Upload,
+      upload: Upload
     };
     const cityPicker: Ref<HTMLElement | null> = ref(null);
 

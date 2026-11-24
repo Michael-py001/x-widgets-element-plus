@@ -423,6 +423,43 @@ describe('FormItem textarea support', () => {
     expect(formData.note).toBe('hi @alice');
   });
 
+  it('renders transfer fields, maps options to data, and syncs the selected keys', async () => {
+    const formData = reactive({ users: [] as string[] });
+    const options = [
+      { key: 'a', label: 'A' },
+      { key: 'b', label: 'B' }
+    ];
+    const wrapper = mount(FormItem, {
+      props: {
+        label: '用户',
+        name: 'users',
+        type: 'transfer',
+        formData,
+        options,
+        props: { key: 'key', label: 'label' }
+      }
+    });
+    const control = wrapper.findComponent({ name: 'ElTransfer' });
+
+    expect(control.exists()).toBe(true);
+    expect(control.props('data')).toEqual(options);
+    await control.vm.$emit('update:modelValue', ['a']);
+    expect(formData.users).toEqual(['a']);
+  });
+
+  it('renders upload fields and syncs the file list', async () => {
+    const formData = reactive({ files: [] as unknown[] });
+    const wrapper = mount(FormItem, {
+      props: { label: '附件', name: 'files', type: 'upload', formData }
+    });
+    const control = wrapper.findComponent({ name: 'ElUpload' });
+
+    expect(control.exists()).toBe(true);
+    const fileList = [{ name: 'a.pdf', url: '/a.pdf' }];
+    await control.vm.$emit('update:fileList', fileList);
+    expect(formData.files).toEqual(fileList);
+  });
+
   it('renders autocomplete fields, writes valueKey to formData, and keeps related-field events', async () => {
     const formData = reactive({
       name: '',

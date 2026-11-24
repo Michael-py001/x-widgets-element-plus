@@ -28,7 +28,9 @@ import {
   Text,
   Textarea,
   TimePicker,
-  TreeSelect
+  Transfer,
+  TreeSelect,
+  Upload
 } from 'x-widgets-element-plus'
 import 'element-plus/dist/index.css'
 import 'x-widgets-element-plus/style.css'
@@ -62,6 +64,8 @@ import 'x-widgets-element-plus/style.css'
 | `CheckboxGroup` | 多值选项 | 使用与 `RadioGroup` 相同的选项归一化，模型值应为数组。 |
 | `Switch` | 单个布尔切换 | 包装 Element Plus Switch；Schema 的 `switch` 会把布尔值写入字段。 |
 | `Autocomplete` | 候选选择 | 本地选项按 `labelKey` 过滤，`valueKey` 遵循 Element Plus 语义；传入 `fetchSuggestions` 时优先使用该回调。 |
+| `Transfer` | 穿梭框 | 包装 Element Plus Transfer；Schema 的 `options` 归一化为原生 `data`，选中值走 `modelValue`；Schema 值 `transfer`。 |
+| `Upload` | 文件上传 | 包装 Element Plus Upload；受控值是 `fileList`（非 `value`/`modelValue`）；Schema 值 `upload`。 |
 | `Text` | 只读展示 | `textValue` 可以是值或格式化函数，不会写回表单模型。 |
 
 ```vue
@@ -114,6 +118,8 @@ const formModel: FormModelBlock[] = [
 ```
 
 Schema 管理的字段不要再传第二个 `v-model`。如果自定义控件仍需保留标签、字段路径和校验容器，请使用 `formSlot`。完整规则见[Schema 表单](/components/forms)。
+
+控件 `type` 同时接受裸名（`input`、`transfer`、`upload` 等）和 `x-` 前缀别名（`x-input`、`x-transfer`、`x-upload` 等）；两者指向同一个适配器，方便与 `x-widgets-antdv` 的 Schema 写法保持一致。
 
 ## 原生与本包边界
 

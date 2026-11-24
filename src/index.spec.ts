@@ -19,6 +19,8 @@ import XWidgets, {
   Slider,
   Switch,
   TimePicker,
+  Transfer,
+  Upload,
   Table,
   TableVirtualized,
   TreeSelect
@@ -50,5 +52,7 @@ describe('XWidgets plugin', () => {
     expect(app.component('XSlider')).toBe(Slider);
     expect(app.component('XColorPicker')).toBe(ColorPicker);
     expect(app.component('XMentions')).toBe(Mentions);
+    expect(app.component('XTransfer')).toBe(Transfer);
+    expect(app.component('XUpload')).toBe(Upload);
   });
 });

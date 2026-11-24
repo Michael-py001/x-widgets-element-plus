@@ -33,6 +33,8 @@ The public entry is `src/index.ts` → `src/components.ts`. Import from the pack
 - Keep API access, query state, permissions, and domain validation in the consuming app. Pass prepared models and rows into widgets.
 - Use `Table` for the standard Element Plus table contract; use `TableVirtualized` only when its V2 dimensions/columns contract fits. Do not transfer `TableColumn` blindly to V2.
 - `AreaCascader` has built-in data and accepts `treeData`; honor `maxLevel`, `minSelectLevel`, and the selected `valueType` when consuming the model.
+- Schema form `type` accepts bare names and `x-` aliases (for example `input`/`x-input`, `transfer`/`x-transfer`, `upload`/`x-upload`) that resolve to the same adapter, matching `x-widgets-antdv` naming. `transfer` binds selected keys via `modelValue`; `upload` binds the controlled `fileList`.
+- `ColorPicker` is available here but has no Ant Design Vue 4 counterpart; do not assume it when porting schemas to `x-widgets-antdv`.
 - Do not invent exports or props. If a required API is missing from the root catalog and declarations, state that and propose a source-backed change.
 
 ## Verification

@@ -28,7 +28,9 @@ import {
   Text,
   Textarea,
   TimePicker,
-  TreeSelect
+  Transfer,
+  TreeSelect,
+  Upload
 } from 'x-widgets-element-plus'
 import 'element-plus/dist/index.css'
 import 'x-widgets-element-plus/style.css'
@@ -62,6 +64,8 @@ Internal source paths are not a stable API. See [Exported components](/en/compon
 | `CheckboxGroup` | Multiple values | Uses the same option normalization as `RadioGroup`; the model should be an array. |
 | `Switch` | Single boolean toggle | Wraps Element Plus switch; schema `switch` writes a boolean to the field. |
 | `Autocomplete` | Candidate selection | Local options are filtered by `labelKey`; `valueKey` follows Element Plus semantics. A supplied `fetchSuggestions` callback takes precedence. |
+| `Transfer` | Transfer list | Wraps Element Plus Transfer; schema `options` are normalized into native `data`, selected keys use `modelValue`; schema `transfer`. |
+| `Upload` | File upload | Wraps Element Plus Upload; the controlled value is `fileList` (not `value`/`modelValue`); schema `upload`. |
 | `Text` | Read-only display | `textValue` can be a value or formatter; it never writes back to the form model. |
 
 ```vue
@@ -114,6 +118,8 @@ const formModel: FormModelBlock[] = [
 ```
 
 Do not add a second `v-model` to a schema-managed field. Use `formSlot` when a custom control still needs the label, field path, and validation container. See [Schema forms](/en/components/forms) for the complete rules.
+
+A control `type` accepts both the bare name (`input`, `transfer`, `upload`, ...) and an `x-` prefixed alias (`x-input`, `x-transfer`, `x-upload`, ...); both resolve to the same adapter, keeping schema syntax consistent with `x-widgets-antdv`.
 
 ## Native and package boundaries
 

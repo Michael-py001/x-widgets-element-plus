@@ -22,6 +22,8 @@ export { default as Rate } from './element-ui/Rate';
 export { default as Slider } from './element-ui/Slider';
 export { default as ColorPicker } from './element-ui/ColorPicker';
 export { default as Mentions } from './element-ui/Mentions';
+export { default as Transfer } from './element-ui/Transfer';
+export { default as Upload } from './element-ui/Upload';
 
 export { default as CustomForm } from './custom/Form';
 export type {
