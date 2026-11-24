@@ -121,6 +121,12 @@ const names = [{ label: 'Alpha', value: 'alpha' }, { label: 'Beta', value: 'beta
 
 <ClientOnly><ElementRealCaseDemo /></ClientOnly>
 
+### 控件画廊
+
+上面三段场景只用到文本、下拉等基础控件。这里把 20+ 种表单控件写进**同一份 `column` schema**，交给 `FormPage` 桥接渲染，值统一写进一个 `formData`；修改任意控件，下方模型实时同步。不是逐个组件 `import` 后各绑一个 `v-model`。
+
+<ClientOnly><ElementControlGallery /></ClientOnly>
+
 ## Schema 桥接
 
 通过 `FormPage`、`FormModal` 或 `SearchForm` 渲染字段时，使用 `ColumnForFormItemType` 与 `FormModelBlock`：
