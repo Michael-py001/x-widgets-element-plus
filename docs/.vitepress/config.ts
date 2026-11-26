@@ -26,16 +26,21 @@ const zhSearchTranslations = {
   },
 }
 
+const base = env.VITEPRESS_BASE || '/'
+// 配置上下文里没有 withBase，手动拼接静态资源路径（base 形如 '/' 或 '/repo/'）。
+const asset = (path: string) => base.replace(/\/$/, '') + '/' + path
+
 export default defineConfig({
   title: 'X Widgets · Element Plus',
   description: '基于 Element Plus 2 的 Vue 3 表单组件库，提供类型化 Schema 表单与业务组件。',
   lang: 'zh-CN',
   cleanUrls: true,
-  base: env.VITEPRESS_BASE || '/',
+  base,
+  // GitHub Pages 部署在子路径下，图标等静态资源必须带 base 前缀，否则会指向域名根目录而 404。
   head: [
-    ['link', { rel: 'icon', href: '/favicon.ico', sizes: 'any' }],
-    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
-    ['link', { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' }],
+    ['link', { rel: 'icon', href: asset('favicon.ico'), sizes: 'any' }],
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: asset('logo.svg') }],
+    ['link', { rel: 'apple-touch-icon', href: asset('apple-touch-icon.png') }],
     ['meta', { name: 'theme-color', content: '#409eff' }],
   ],
   vite: {

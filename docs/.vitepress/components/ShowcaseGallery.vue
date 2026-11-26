@@ -1,26 +1,26 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
-import { useData } from 'vitepress'
+import { useData, withBase } from 'vitepress'
 
 /** 首页案例预览：根据当前语言自动切换标题与说明，点击图片可放大查看。 */
 const { lang } = useData()
 const isZh = computed(() => lang.value.toLowerCase().startsWith('zh'))
-// 英文站点位于 /en/ 下，卡片链接需按当前语言加前缀。
-const linkBase = computed(() => (isZh.value ? '' : '/en') + '/components/controls')
+// 英文站点位于 /en/ 下；GitHub Pages 部署在子路径，链接与图片都要带 base 前缀。
+const linkBase = computed(() => withBase((isZh.value ? '' : '/en') + '/components/controls'))
 
 const items = computed(() => [
   {
-    img: '/screenshots/real-case.webp',
+    img: withBase('/screenshots/real-case.webp'),
     zh: { tag: '真实案例', title: '查询 → 表格 → 弹窗复用同一份 Schema', desc: '项目管理双列查询、新增/编辑弹窗、测算行内入参，字段只声明一次。' },
     en: { tag: 'Real cases', title: 'One schema across search, table, and modal', desc: 'Two-column project query, create/edit modal, and inline cost inputs — fields declared once.' },
   },
   {
-    img: '/screenshots/advanced.webp',
+    img: withBase('/screenshots/advanced.webp'),
     zh: { tag: '进阶用法', title: '一份字段契约，四种布局', desc: '多列 / 左右 / 行内 / 垂直布局复用同一 schema，覆盖 formSlot、前后缀与容器插槽。' },
     en: { tag: 'Advanced', title: 'One field contract, four layouts', desc: 'Multi-column, split, inline, and vertical layouts from one schema, with formSlot and affix slots.' },
   },
   {
-    img: '/screenshots/gallery.webp',
+    img: withBase('/screenshots/gallery.webp'),
     zh: { tag: '控件画廊', title: '一份 column 渲染全部控件', desc: '由 FormPage 桥接到同一个 formData，修改字段即可实时看到模型同步。' },
     en: { tag: 'Control gallery', title: 'One column renders every control', desc: 'FormPage bridges them to a single formData; edit a field and watch the model update live.' },
   },
