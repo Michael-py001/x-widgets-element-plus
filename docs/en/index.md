@@ -30,3 +30,5 @@ Built for Vue 3 applications already using Element Plus 2. Load Element Plus and
 
 The package is independent of host-application APIs. It is a separate UI package from `x-widgets-antdv`; the two frameworks, style systems, and component-specific behavior are not interchangeable.
 
+<ShowcaseGallery />
+

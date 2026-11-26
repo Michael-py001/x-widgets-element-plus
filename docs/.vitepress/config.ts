@@ -32,7 +32,12 @@ export default defineConfig({
   lang: 'zh-CN',
   cleanUrls: true,
   base: env.VITEPRESS_BASE || '/',
-  head: [['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }]],
+  head: [
+    ['link', { rel: 'icon', href: '/favicon.ico', sizes: 'any' }],
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
+    ['link', { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' }],
+    ['meta', { name: 'theme-color', content: '#409eff' }],
+  ],
   vite: {
     plugins: [vueJsx()],
     resolve: {

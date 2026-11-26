@@ -29,3 +29,5 @@ features:
 为已经使用 Element Plus 2 的 Vue 3 应用而设计。加载 Element Plus 与本包的 CSS，然后用类型化的表单字段和明确的表格契约组合[已导出的组件](/components/)。
 
 本包不绑定任何特定应用的 API。它是独立于 `x-widgets-antdv` 的 UI 包；两者的框架、样式体系与组件特有行为均不可互换。
+
+<ShowcaseGallery />

@@ -9,6 +9,8 @@
 import { computed, reactive } from 'vue'
 import { FormPage, Tag } from 'x-widgets-element-plus'
 import type { ColumnForFormItemType, FormModelBlock } from 'x-widgets-element-plus'
+import CodeBlock from './CodeBlock.vue'
+import demoSource from './ControlGallery.vue?raw'
 import 'element-plus/dist/index.css'
 
 const formData = reactive<Record<string, any>>({
@@ -99,6 +101,8 @@ const entries = computed(() => Object.entries(formData).map(([key, value]) => ({
         <Tag text="text 只读" type="danger" />
       </div>
     </div>
+
+    <CodeBlock :code="demoSource" />
   </div>
 </template>
 

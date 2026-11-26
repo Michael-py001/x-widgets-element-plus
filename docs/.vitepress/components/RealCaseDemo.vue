@@ -20,6 +20,8 @@ import type {
   FormModelBlock,
   FormItemSlotRenderContext,
 } from 'x-widgets-element-plus'
+import CodeBlock from './CodeBlock.vue'
+import demoSource from './RealCaseDemo.vue?raw'
 import 'element-plus/dist/index.css'
 
 interface ProjectRow {
@@ -248,7 +250,7 @@ const inlineDemoModel: FormModelBlock[] = [{ column: inlineWithUpload }]
       <p v-if="savedMessage" class="saved">{{ savedMessage }}</p>
       <FormModal v-model:show="modalVisible" :modal-title="modalTitle"
         :form-model="modalSchema" :form-data="formModel" :disabled="modalDisabled"
-        layout="horizontal" label-width="96px" modal-width="680px"
+        layout="horizontal" label-width="96px" modal-width="680px" :gutter="24"
         @confirm="onConfirm" />
     </section>
 
@@ -260,6 +262,8 @@ const inlineDemoModel: FormModelBlock[] = [{ column: inlineWithUpload }]
         layout="inline" label-width="92px" />
       <p class="x-note">当前入参：{{ JSON.stringify(inlineForm) }}</p>
     </section>
+
+    <CodeBlock :code="demoSource" />
   </div>
 </template>
 

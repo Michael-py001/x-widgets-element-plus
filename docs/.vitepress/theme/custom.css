@@ -1,3 +1,6 @@
+/* Element Plus 官方暗色变量：按 html.dark 切换，与 VitePress 主题开关同步。 */
+@import 'element-plus/theme-chalk/dark/css-vars.css';
+
 :root {
   --vp-home-hero-name-background: none;
   --vp-home-hero-name-color: var(--vp-c-brand-1);

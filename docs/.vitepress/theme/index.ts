@@ -3,6 +3,7 @@ import ControlDemo from '../components/ControlDemo.vue'
 import AdvancedDemo from '../components/AdvancedDemo.vue'
 import RealCaseDemo from '../components/RealCaseDemo.vue'
 import ControlGallery from '../components/ControlGallery.vue'
+import ShowcaseGallery from '../components/ShowcaseGallery.vue'
 import './custom.css'
 
 export default {
@@ -13,5 +14,6 @@ export default {
     app.component('ElementAdvancedDemo', AdvancedDemo)
     app.component('ElementRealCaseDemo', RealCaseDemo)
     app.component('ElementControlGallery', ControlGallery)
+    app.component('ShowcaseGallery', ShowcaseGallery)
   },
 }
