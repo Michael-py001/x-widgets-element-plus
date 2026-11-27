@@ -32,6 +32,7 @@ export { default as TimeSelect } from './element-ui/TimeSelect';
 export { default as CustomForm } from './custom/Form';
 export type {
   ColumnForFormItemType,
+  FormBlockSlotRenderContext,
   FormItemAffixSlotRender,
   FormBlockSlotRender,
   FormItemCoreProps,

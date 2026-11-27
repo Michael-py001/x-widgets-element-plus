@@ -13,12 +13,14 @@ import {
   SearchForm,
   FormModal,
   FormPage,
+  Table,
   Tag,
 } from 'x-widgets-element-plus'
 import type {
   ColumnForFormItemType,
   FormModelBlock,
   FormItemSlotRenderContext,
+  TableColumn,
 } from 'x-widgets-element-plus'
 import CodeBlock from './CodeBlock.vue'
 import demoSource from './RealCaseDemo.vue?raw'
@@ -56,7 +58,8 @@ const labelOf = (options: Array<{ label: string; value: string }>, value: string
 
 /* ---------- ① 列表查询（来自 useBasicProjectSearchForm） ---------- */
 const query = reactive({
-  projectName: '', ownerUnit: '', location: '', projectType: '', designStage: '',
+  projectName: '', ownerUnit: '', location: '',
+  projectType: null as string | null, designStage: null as string | null,
 })
 
 const searchColumns: ColumnForFormItemType[] = [
@@ -67,11 +70,11 @@ const searchColumns: ColumnForFormItemType[] = [
   { el: 'input', label: '项目所在地', name: 'location', colspan: 12,
     props: { placeholder: '请输入所在地', clearable: true } },
   { el: 'select', label: '项目类型', name: 'projectType', colspan: 12,
-    options: [{ label: '全部', value: '' }, ...projectTypeOptions],
-    props: { clearable: true, placeholder: '请选择项目类型' } },
+    options: projectTypeOptions,
+    props: { clearable: true, placeholder: '全部类型' } },
   { el: 'select', label: '设计阶段', name: 'designStage', colspan: 12,
-    options: [{ label: '全部', value: '' }, ...designStageOptions],
-    props: { clearable: true, placeholder: '请选择设计阶段' } },
+    options: designStageOptions,
+    props: { clearable: true, placeholder: '全部阶段' } },
 ]
 
 const rows = ref<ProjectRow[]>([
@@ -88,7 +91,7 @@ function applyQuery() {
   runCount.value += 1
 }
 function resetQuery() {
-  Object.assign(applied, { projectName: '', ownerUnit: '', location: '', projectType: '', designStage: '' })
+  Object.assign(applied, { projectName: '', ownerUnit: '', location: '', projectType: null, designStage: null })
   runCount.value += 1
 }
 
@@ -99,6 +102,18 @@ const filteredRows = computed(() => rows.value.filter((row) => (
   (!applied.projectType || row.projectType === applied.projectType) &&
   (!applied.designStage || row.designStage === applied.designStage)
 )))
+
+const resultColumns: TableColumn[] = [
+  { prop: 'projectName', label: '项目名称', minWidth: 150 },
+  { prop: 'ownerUnit', label: '业主单位', minWidth: 110 },
+  { prop: 'location', label: '所在地', minWidth: 80 },
+  { label: '类型', minWidth: 80, cellRenderer: ({ rowData }) => labelOf(projectTypeOptions, rowData.projectType) },
+  { label: '阶段', minWidth: 80, cellRenderer: ({ rowData }) => labelOf(designStageOptions, rowData.designStage) },
+  { label: '操作', minWidth: 120, cellRenderer: ({ rowData }) => h('div', { class: 'ops' }, [
+    h('button', { type: 'button', onClick: () => openRow(rowData, 'detail') }, '详情'),
+    h('button', { type: 'button', onClick: () => openRow(rowData, 'edit') }, '编辑'),
+  ]) },
+]
 
 /* ---------- ② 新增 / 编辑弹窗（来自 useBasicProjectFormModal） ---------- */
 type ModalMode = 'create' | 'edit' | 'detail'
@@ -113,7 +128,8 @@ const modalDisabled = computed(() => modalMode.value === 'detail')
 
 const emptyForm = () => ({
   projectName: '', ownerUnit: '', location: '', capacity: '',
-  projectType: '', designStage: '', isGeneralContract: '', remark: '',
+  projectType: null as string | null, designStage: null as string | null,
+  isGeneralContract: null as string | null, remark: '',
 })
 const formModel = reactive(emptyForm())
 
@@ -221,25 +237,7 @@ const inlineDemoModel: FormModelBlock[] = [{ column: inlineWithUpload }]
         <span>{{ filteredRows.length }} 条 · 第 {{ runCount }} 次查询</span>
         <Tag text="schema 驱动" type="success" />
       </div>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>项目名称</th><th>业主单位</th><th>所在地</th><th>类型</th><th>阶段</th><th>操作</th></tr></thead>
-          <tbody>
-            <tr v-for="row in filteredRows" :key="row.id">
-              <td>{{ row.projectName }}</td>
-              <td>{{ row.ownerUnit }}</td>
-              <td>{{ row.location }}</td>
-              <td>{{ labelOf(projectTypeOptions, row.projectType) }}</td>
-              <td>{{ labelOf(designStageOptions, row.designStage) }}</td>
-              <td class="ops">
-                <button type="button" @click="openRow(row, 'detail')">详情</button>
-                <button type="button" @click="openRow(row, 'edit')">编辑</button>
-              </td>
-            </tr>
-            <tr v-if="!filteredRows.length"><td colspan="6" class="empty">无匹配数据</td></tr>
-          </tbody>
-        </table>
-      </div>
+      <Table :columns="resultColumns" :data="filteredRows" :pagination="false" />
     </section>
 
     <!-- ② 弹窗表单 -->
@@ -250,7 +248,7 @@ const inlineDemoModel: FormModelBlock[] = [{ column: inlineWithUpload }]
       <p v-if="savedMessage" class="saved">{{ savedMessage }}</p>
       <FormModal v-model:show="modalVisible" :modal-title="modalTitle"
         :form-model="modalSchema" :form-data="formModel" :disabled="modalDisabled"
-        layout="horizontal" label-width="96px" modal-width="680px" :gutter="24"
+        layout="horizontal" label-width="96px" modal-width="680px"
         @confirm="onConfirm" />
     </section>
 
@@ -278,14 +276,9 @@ const inlineDemoModel: FormModelBlock[] = [{ column: inlineWithUpload }]
 .case-block h4 small { font-weight: 400; font-size: 11px; color: var(--vp-c-text-3); margin-left: 6px; }
 .case-hint { margin: 0 0 10px; font-size: 12px; color: var(--vp-c-text-2); line-height: 1.5; }
 .result-bar { display: flex; align-items: center; justify-content: space-between; margin: 10px 0 8px; font-size: 12px; color: var(--vp-c-text-2); }
-.table-wrap { overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; font-size: 12px; }
-th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--vp-c-divider); white-space: nowrap; }
-th { color: var(--vp-c-text-2); font-weight: 600; background: var(--vp-c-bg-soft); }
-.ops { display: flex; gap: 6px; }
-.ops button { font: inherit; font-size: 12px; padding: 4px 9px; border: 1px solid var(--vp-c-brand-1); border-radius: 5px; background: transparent; color: var(--vp-c-brand-1); cursor: pointer; }
-.ops button.primary { background: var(--vp-c-brand-1); color: #fff; }
-.empty { text-align: center; color: var(--vp-c-text-3); }
+:deep(.XTable) { width: 100%; }
+:deep(.ops) { display: flex; gap: 6px; }
+:deep(.ops button) { font: inherit; font-size: 12px; padding: 4px 9px; border: 1px solid var(--vp-c-brand-1); border-radius: 5px; background: transparent; color: var(--vp-c-brand-1); cursor: pointer; }
 .saved { font-size: 12px; color: var(--vp-c-brand-1); margin: 8px 0 0; }
 .x-note { font-size: 12px; color: var(--vp-c-text-2); margin: 10px 0 0; }
 :deep(.x-pick) { cursor: pointer; }

@@ -14,7 +14,7 @@ import demoSource from './ControlGallery.vue?raw'
 import 'element-plus/dist/index.css'
 
 const formData = reactive<Record<string, any>>({
-  text: '', textarea: '', number: 1, select: '', radio: 'gas', checkbox: true,
+  text: '', textarea: '', number: 1, select: null, radio: 'gas', checkbox: true,
   checkboxGroup: ['estimate'], switchOn: true, date: '', color: '#409eff',
   rate: 3, slider: 40, segmented: 'month', tags: ['造价'], timeSelect: '',
   password: '', search: '', textReadonly: '由 textValue 展示，不写回模型',
@@ -40,7 +40,7 @@ const model: FormModelBlock[] = [
     { label: '下拉选择', name: 'select', type: 'select', colspan: 12,
       options: [
         { label: '燃机', value: 'gas' }, { label: '输电', value: 'grid' }, { label: '海风', value: 'offshore' },
-      ], props: { clearable: true, placeholder: '请选择' } },
+      ], props: { clearable: true, placeholder: '请选择类型' } },
     { label: '单选', name: 'radio', type: 'radio-group', colspan: 12,
       options: [
         { label: '燃机', value: 'gas' }, { label: '输电', value: 'grid' }, { label: '海风', value: 'offshore' },

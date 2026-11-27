@@ -97,35 +97,7 @@ const names = [{ label: 'Alpha', value: 'alpha' }, { label: 'Beta', value: 'beta
 
 ## 交互示例
 
-### 基础用法
-
-一份 `column` schema 交给 `SearchForm` 渲染成查询表单（`colspan=12` 两列），字段值统一写进同一个 `formData`；提交后过滤下方结果。试着填写项目名称、业主单位或项目类型，再点「查询」。
-
-<ClientOnly><ElementControlDemo /></ClientOnly>
-
-### 进阶用法
-
-切换「多列布局 / 左右布局 / 行内布局」，同一份字段契约会用不同方式渲染：多列用 `colspan`，左右用 `fieldsetStyle` 分栏，行内用 `SearchForm`。插槽同时演示 `formSlot` 渲染函数、`beforeSlot`/`afterSlot` 前后缀和字符串 `slot`。点击「工程附件」可体验插槽交互。
-
-<ClientOnly><ElementAdvancedDemo /></ClientOnly>
-
-### 真实案例简化
-
-把原项目三个页面的 composable 简化成一套可操作的 Demo，展示 Schema 桥接在真实场景里的用法：
-
-1. **项目管理 · 列表查询**（`useBasicProjectSearchForm`）：`colspan=12` 两列查询表单；提交后按同一份 `formData` 过滤表格。
-2. **新增 / 编辑弹窗**（`useBasicProjectFormModal`）：详情、编辑、新增共用一套 `formModel`，`detail` 模式仅切换 `disabled`。
-3. **测算工作台 · 行内入参**（`useGeneralCostEditForm`）：`inline` 布局下 `colspan` 不生效，字段用 `formSlot` 渲染函数做成点击上传框。
-
-试着查询、新增项目、再编辑或查看详情，体会同一套字段契约在三种场景的复用。
-
-<ClientOnly><ElementRealCaseDemo /></ClientOnly>
-
-### 控件画廊
-
-上面三段场景只用到文本、下拉等基础控件。这里把 18 种表单控件写进**同一份 `column` schema**，交给 `FormPage` 桥接渲染，值统一写进一个 `formData`；修改任意控件，下方模型实时同步。不是逐个组件 `import` 后各绑一个 `v-model`。
-
-<ClientOnly><ElementControlGallery /></ClientOnly>
+可运行示例见独立页面：[基础案例](/components/cases-basic)（基础用法、控件画廊）与[进阶案例](/components/cases-advanced)（进阶布局、真实案例）；插槽写法见[插槽用法](/components/slots)。
 
 ## Schema 桥接
 

@@ -86,6 +86,9 @@ export interface FormSlotRenderContext {
   formData: Record<string, any>;
 }
 
+/** 区块级插槽上下文，与字段级共享同一结构。 */
+export type FormBlockSlotRenderContext = FormSlotRenderContext;
+
 /**
  * 表单项级自定义渲染上下文。
  */

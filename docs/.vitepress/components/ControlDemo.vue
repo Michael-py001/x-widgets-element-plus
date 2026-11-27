@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed, reactive, ref } from 'vue'
-import { SearchForm, Tag } from 'x-widgets-element-plus'
-import type { ColumnForFormItemType } from 'x-widgets-element-plus'
+import { computed, h, reactive, ref } from 'vue'
+import { SearchForm, Table, Tag } from 'x-widgets-element-plus'
+import type { ColumnForFormItemType, TableColumn } from 'x-widgets-element-plus'
 import CodeBlock from './CodeBlock.vue'
 import demoSource from './ControlDemo.vue?raw'
 import 'element-plus/dist/index.css'
@@ -11,7 +11,9 @@ import 'element-plus/dist/index.css'
  * 字段不各自绑 v-model，而是把值写进同一个 formData。提交后驱动下方结果表。
  * 这是本包 Schema 桥接的核心：字段定义一次，查询与展示共用同一份契约。
  */
-const filters = reactive({ projectName: '', ownerUnit: '', projectType: '' })
+const filters = reactive<{ projectName: string; ownerUnit: string; projectType: string | null }>({
+  projectName: '', ownerUnit: '', projectType: null,
+})
 
 const columns: ColumnForFormItemType[] = [
   { name: 'projectName', label: '项目名称', el: 'input', colspan: 12,
@@ -20,12 +22,11 @@ const columns: ColumnForFormItemType[] = [
     props: { clearable: true, placeholder: '输入业主单位' } },
   { name: 'projectType', label: '项目类型', el: 'select', colspan: 12,
     options: [
-      { label: '全部', value: '' },
       { label: '燃机', value: 'gas' },
       { label: '输电', value: 'grid' },
       { label: '海风', value: 'offshore' },
     ],
-    props: { clearable: true } },
+    props: { clearable: true, placeholder: '全部类型' } },
 ]
 
 const records = [
@@ -33,6 +34,19 @@ const records = [
   { key: '2', projectName: '特高压线路评估', ownerUnit: '国网设计院', projectType: 'grid', stage: '草稿' },
   { key: '3', projectName: '近海风电场测算', ownerUnit: '中广核', projectType: 'offshore', stage: '已发布' },
   { key: '4', projectName: '燃机改扩建估算', ownerUnit: '华能', projectType: 'gas', stage: '已归档' },
+]
+
+const typeLabel: Record<string, string> = { gas: '燃机', grid: '输电', offshore: '海风' }
+const resultColumns: TableColumn[] = [
+  { prop: 'projectName', label: '项目名称', minWidth: 160 },
+  { prop: 'ownerUnit', label: '业主单位', minWidth: 120 },
+  { label: '类型', minWidth: 90,
+    cellRenderer: ({ rowData }) => typeLabel[rowData.projectType] || '—' },
+  { label: '状态', minWidth: 100,
+    cellRenderer: ({ rowData }) => h(Tag, {
+      text: rowData.stage,
+      type: rowData.stage === '已发布' ? 'success' : rowData.stage === '草稿' ? 'primary' : 'info',
+    }) },
 ]
 
 const applied = ref({ ...filters })
@@ -74,18 +88,7 @@ function onReset(values: typeof filters): void {
         <strong>查询结果</strong>
         <span>{{ result.length }} 条 · 第 {{ runs }} 次查询</span>
       </div>
-      <table>
-        <thead><tr><th>项目名称</th><th>业主单位</th><th>类型</th><th>状态</th></tr></thead>
-        <tbody>
-          <tr v-for="row in result" :key="row.key">
-            <td>{{ row.projectName }}</td>
-            <td>{{ row.ownerUnit }}</td>
-            <td>{{ row.projectType }}</td>
-            <td><Tag :text="row.stage" :type="row.stage === '已发布' ? 'success' : row.stage === '草稿' ? 'primary' : 'info'" /></td>
-          </tr>
-          <tr v-if="result.length === 0"><td colspan="4" class="empty">没有匹配的记录</td></tr>
-        </tbody>
-      </table>
+      <Table :columns="resultColumns" :data="result" :pagination="false" />
     </div>
 
     <CodeBlock :code="demoSource" />
@@ -102,9 +105,5 @@ function onReset(values: typeof filters): void {
 .result__head { display:flex; justify-content:space-between; align-items:baseline; gap:12px; margin-bottom:10px; }
 .result__head strong { font-size:14px; }
 .result__head span { font-size:12px; color:var(--vp-c-text-2); }
-table { width:100%; border-collapse:collapse; font-size:13px; }
-th,td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--vp-c-divider); }
-th { color:var(--vp-c-text-2); font-weight:600; }
-td.empty { text-align:center; color:var(--vp-c-text-2); }
-@media (max-width:640px){ th,td { padding:6px; font-size:12px; } }
+.result :deep(.XTable) { width:100%; }
 </style>

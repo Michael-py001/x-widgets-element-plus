@@ -2,6 +2,7 @@ import FormItem from './FormItem';
 import type { App } from 'vue';
 import type {
   ColumnForFormItemType,
+  FormBlockSlotRenderContext,
   FormItemAffixSlotRender,
   FormBlockSlotRender,
   FormItemCoreProps,
@@ -21,6 +22,7 @@ export default Object.assign(FormItem, {
 
 export type {
   ColumnForFormItemType,
+  FormBlockSlotRenderContext,
   FormItemAffixSlotRender,
   FormBlockSlotRender,
   FormItemCoreProps,

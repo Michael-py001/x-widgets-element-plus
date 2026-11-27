@@ -95,37 +95,9 @@ const names = [{ label: 'Alpha', value: 'alpha' }, { label: 'Beta', value: 'beta
 
 The host application owns options, requests, loading state, permissions, and side effects. These adapters do not fetch domain data for you.
 
-## Interactive example
+## Interactive examples
 
-### Basic usage
-
-One `column` schema is rendered by `SearchForm` into a query form (`colspan=12`, two columns); all field values write into a single `formData` object, then filter the results below. Try a project name, owner, or type, then click "Search".
-
-<ClientOnly><ElementControlDemo /></ClientOnly>
-
-### Advanced usage
-
-Switch between "multi-column / split / inline": the same field contract renders three ways — `colspan` grid, `fieldsetStyle` split columns, and an inline `SearchForm`. Slots cover `formSlot` render functions, `beforeSlot`/`afterSlot` affixes, and a named string `slot`. Click "Attachment" to try the slot.
-
-<ClientOnly><ElementAdvancedDemo /></ClientOnly>
-
-### Real-page case
-
-Three composables from real pages, reduced to one interactive demo that shows schema bridging in production scenarios:
-
-1. **Project management · list query** (`useBasicProjectSearchForm`): a two-column (`colspan=12`) query form; submitting filters the table from the same `formData`.
-2. **Create / edit modal** (`useBasicProjectFormModal`): detail, edit and create share one `formModel`; detail mode only flips `disabled`.
-3. **Cost workbench · inline inputs** (`useGeneralCostEditForm`): `colspan` has no effect in an `inline` layout; a `formSlot` render function turns a field into a click-to-upload box.
-
-Try searching, creating a project, then editing or viewing its details to see one field contract reused across all three scenarios.
-
-<ClientOnly><ElementRealCaseDemo /></ClientOnly>
-
-### Control gallery
-
-The scenarios above mostly use text and select fields. Here 18 form controls are written into **one `column` schema** and rendered by `FormPage` into a single `formData`; editing any control updates the model below live. This is schema bridging, not importing each component and binding its own `v-model`.
-
-<ClientOnly><ElementControlGallery /></ClientOnly>
+Runnable demos now live on dedicated pages: [Basic cases](/en/components/cases-basic) (basic usage, control gallery) and [Advanced cases](/en/components/cases-advanced) (advanced layouts, real-page case); slot patterns are covered in [Slots](/en/components/slots).
 
 ## Schema bridge
 

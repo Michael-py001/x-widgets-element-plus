@@ -18,7 +18,7 @@ import 'element-plus/dist/index.css'
  * 查询区支持 btnAfter。
  */
 const formData = reactive({
-  projectName: '', ownerUnit: '', projectType: '', designStage: '',
+  projectName: '', ownerUnit: '', projectType: null as string | null, designStage: null as string | null,
   remark: '', attachment: '', contact: '', investment: '',
 })
 
@@ -56,11 +56,11 @@ const baseFields: ColumnForFormItemType[] = [
   { label: '项目类型', name: 'projectType', type: 'select', colspan: 12,
     options: [
       { label: '燃机', value: 'gas' }, { label: '输电', value: 'grid' }, { label: '海风', value: 'offshore' },
-    ] },
+    ], props: { placeholder: '全部类型' } },
   { label: '设计阶段', name: 'designStage', type: 'select', colspan: 12,
     options: [
       { label: '可研', value: 'feasibility' }, { label: '初设', value: 'concept' }, { label: '施工图', value: 'detail' },
-    ] },
+    ], props: { placeholder: '全部阶段' } },
 ]
 
 const multiModel: FormModelBlock[] = [
@@ -85,10 +85,10 @@ const inlineColumns: ColumnForFormItemType[] = [
   { name: 'projectName', label: '项目名称', el: 'input', props: { placeholder: '项目名称', clearable: true } },
   { name: 'ownerUnit', label: '业主', el: 'input', props: { placeholder: '业主', clearable: true } },
   { name: 'projectType', label: '类型', el: 'select', options: [
-    { label: '全部', value: '' }, { label: '燃机', value: 'gas' }, { label: '海风', value: 'offshore' },
-  ] },
+    { label: '燃机', value: 'gas' }, { label: '海风', value: 'offshore' },
+  ], props: { placeholder: '全部类型' } },
 ]
-const inlineFilters = reactive({ projectName: '', ownerUnit: '', projectType: '' })
+const inlineFilters = reactive({ projectName: '', ownerUnit: '', projectType: null as string | null })
 const searched = ref('')
 const exported = ref('')
 
@@ -121,7 +121,7 @@ const formLayout = computed(() => layout.value === 'vertical' ? 'vertical' : 'ho
     </template>
 
     <FormPage v-else :key="layout" :form-model="currentModel" :form-data="formData"
-      :layout="formLayout" label-width="96px" :gutter="24"
+      :layout="formLayout" label-width="96px"
       :fieldset-style="layout === 'split' ? { display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) 150px', gap: '12px', gridTemplate: 'minmax(0, 1fr) 150px' } : {}">
       <template #header>
         <div class="x-form-head">当前布局：<b>{{ layoutLabels[layout] }}</b> · 标签 "{{ formLayout === 'vertical' ? '在上方' : '在左侧' }}" · 字段由同一份 schema 渲染</div>
@@ -175,8 +175,6 @@ const formLayout = computed(() => layout.value === 'vertical' ? 'vertical' : 'ho
 .x-extra-btn { font:inherit; font-size:12px; padding:7px 12px; border:1px solid var(--vp-c-brand-1); border-radius:6px; background:transparent; color:var(--vp-c-brand-1); cursor:pointer; }
 :deep(.x-pick) { display:flex; align-items:center; min-height:32px; padding:4px 12px; border:1px dashed var(--vp-c-brand-1); border-radius:6px; color:var(--vp-c-brand-1); cursor:pointer; font-size:13px; }
 :deep(.x-affix) { font-size:13px; color:var(--vp-c-text-2); white-space:nowrap; padding:0 6px; }
-/* 控件之间留出清晰间隙：字段行之间保持呼吸空间。 */
-:deep(.x-form-item) { padding-bottom:4px; }
 :deep(.x-side-note) { padding:12px; background:var(--vp-c-bg); border-radius:8px; font-size:12px; color:var(--vp-c-text-2); line-height:1.5; }
 :deep(.x-side-note strong) { display:block; font-size:13px; color:var(--vp-c-text-1); margin-bottom:6px; }
 :deep(.x-side-note p) { margin:4px 0; }

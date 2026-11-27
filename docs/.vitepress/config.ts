@@ -67,17 +67,28 @@ export default defineConfig({
         search: { provider: 'local', options: { translations: zhSearchTranslations } },
         sidebar: {
           '/guide': [{ text: '从这里开始', items: [{ text: '安装与配置', link: '/guide' }] }],
-          '/components': [{ text: '参考', items: [
-            { text: '导出的组件', link: '/components' },
-            { text: '基础控件', link: '/components/controls' },
-            { text: 'Schema 表单', link: '/components/forms' },
-            { text: '表格', link: '/components/table' },
-            { text: '弹窗、标签与提示', link: '/components/feedback' },
-            { text: 'AreaCascader 行政区划级联', link: '/components/area-cascader' },
-            { text: 'LoadingProgress 进度', link: '/components/loading-progress' },
-            { text: '工具与类型导出', link: '/components/exports' },
-            { text: '跨库兼容性', link: '/components/compatibility' },
-          ] }],
+          '/components': [
+            { text: '基础', items: [
+              { text: '导出的组件', link: '/components' },
+              { text: '基础控件', link: '/components/controls' },
+              { text: '基础案例', link: '/components/cases-basic' },
+            ] },
+            { text: '进阶', items: [
+              { text: 'Schema 表单', link: '/components/forms' },
+              { text: '表格', link: '/components/table' },
+              { text: '进阶案例', link: '/components/cases-advanced' },
+              { text: '插槽用法', link: '/components/slots' },
+            ] },
+            { text: '扩展', items: [
+              { text: '弹窗、标签与提示', link: '/components/feedback' },
+              { text: 'AreaCascader 行政区划级联', link: '/components/area-cascader' },
+              { text: 'LoadingProgress 进度', link: '/components/loading-progress' },
+              { text: '工具与类型导出', link: '/components/exports' },
+            ] },
+            { text: '兼容性', items: [
+              { text: '跨库兼容性', link: '/components/compatibility' },
+            ] },
+          ],
           '/ai': [{ text: 'AI 集成', items: [{ text: 'Agent 使用指南', link: '/ai' }] }],
         },
         outline: { level: [2, 3], label: '本页目录' },
@@ -113,17 +124,28 @@ export default defineConfig({
         search: { provider: 'local' },
         sidebar: {
           '/en/guide': [{ text: 'Start here', items: [{ text: 'Installation & setup', link: '/en/guide' }] }],
-          '/en/components': [{ text: 'Reference', items: [
-            { text: 'Exported components', link: '/en/components' },
-            { text: 'Controls', link: '/en/components/controls' },
-            { text: 'Schema forms', link: '/en/components/forms' },
-            { text: 'Table', link: '/en/components/table' },
-            { text: 'Dialogs, tags & tooltips', link: '/en/components/feedback' },
-            { text: 'AreaCascader', link: '/en/components/area-cascader' },
-            { text: 'LoadingProgress', link: '/en/components/loading-progress' },
-            { text: 'Utility & type exports', link: '/en/components/exports' },
-            { text: 'Cross-library compatibility', link: '/en/components/compatibility' },
-          ] }],
+          '/en/components': [
+            { text: 'Basics', items: [
+              { text: 'Exported components', link: '/en/components' },
+              { text: 'Controls', link: '/en/components/controls' },
+              { text: 'Basic cases', link: '/en/components/cases-basic' },
+            ] },
+            { text: 'Advanced', items: [
+              { text: 'Schema forms', link: '/en/components/forms' },
+              { text: 'Table', link: '/en/components/table' },
+              { text: 'Advanced cases', link: '/en/components/cases-advanced' },
+              { text: 'Slots', link: '/en/components/slots' },
+            ] },
+            { text: 'Extended', items: [
+              { text: 'Dialogs, tags & tooltips', link: '/en/components/feedback' },
+              { text: 'AreaCascader', link: '/en/components/area-cascader' },
+              { text: 'LoadingProgress', link: '/en/components/loading-progress' },
+              { text: 'Utility & type exports', link: '/en/components/exports' },
+            ] },
+            { text: 'Compatibility', items: [
+              { text: 'Cross-library compatibility', link: '/en/components/compatibility' },
+            ] },
+          ],
           '/en/ai': [{ text: 'AI integration', items: [{ text: 'Agent guide', link: '/en/ai' }] }],
         },
         outline: { level: [2, 3] },
