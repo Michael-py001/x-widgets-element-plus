@@ -7,6 +7,38 @@
   --vp-nav-logo-height: 30px;
 }
 
+/* 细圆角滚动条，跟随站点主题色；同时美化 Element Plus 表格内部的纵向滚动条。 */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--vp-c-brand-1) transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--vp-c-brand-1);
+  border-radius: 8px;
+  opacity: 0.7;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--vp-c-brand-2);
+}
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* 滑块使用主题蓝色，与文档站主题色一致。 */
+.el-slider__bar {
+  background: var(--vp-c-brand-1) !important;
+}
+.el-slider__button {
+  border-color: var(--vp-c-brand-1) !important;
+}
+
 /* 语言下拉菜单必须能溢出导航栏：VitePress 的 .content 默认 overflow:auto 会把菜单裁掉。 */
 .VPNavBar .content {
   overflow: visible !important;

@@ -38,11 +38,11 @@ const records = [
 
 const typeLabel: Record<string, string> = { gas: '燃机', grid: '输电', offshore: '海风' }
 const resultColumns: TableColumn[] = [
-  { prop: 'projectName', label: '项目名称', minWidth: 160 },
-  { prop: 'ownerUnit', label: '业主单位', minWidth: 120 },
-  { label: '类型', minWidth: 90,
+  { prop: 'projectName', label: '项目名称', width: 210 },
+  { prop: 'ownerUnit', label: '业主单位', width: 185 },
+  { label: '类型', width: 125,
     cellRenderer: ({ rowData }) => typeLabel[rowData.projectType] || '—' },
-  { label: '状态', minWidth: 100,
+  { label: '状态', width: 100,
     cellRenderer: ({ rowData }) => h(Tag, {
       text: rowData.stage,
       type: rowData.stage === '已发布' ? 'success' : rowData.stage === '草稿' ? 'primary' : 'info',

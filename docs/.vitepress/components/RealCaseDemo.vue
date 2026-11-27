@@ -104,12 +104,12 @@ const filteredRows = computed(() => rows.value.filter((row) => (
 )))
 
 const resultColumns: TableColumn[] = [
-  { prop: 'projectName', label: '项目名称', minWidth: 150 },
-  { prop: 'ownerUnit', label: '业主单位', minWidth: 110 },
-  { prop: 'location', label: '所在地', minWidth: 80 },
-  { label: '类型', minWidth: 80, cellRenderer: ({ rowData }) => labelOf(projectTypeOptions, rowData.projectType) },
-  { label: '阶段', minWidth: 80, cellRenderer: ({ rowData }) => labelOf(designStageOptions, rowData.designStage) },
-  { label: '操作', minWidth: 120, cellRenderer: ({ rowData }) => h('div', { class: 'ops' }, [
+  { prop: 'projectName', label: '项目名称', width: 170 },
+  { prop: 'ownerUnit', label: '业主单位', width: 135 },
+  { prop: 'location', label: '所在地', width: 75 },
+  { label: '类型', width: 75, cellRenderer: ({ rowData }) => labelOf(projectTypeOptions, rowData.projectType) },
+  { label: '阶段', width: 75, cellRenderer: ({ rowData }) => labelOf(designStageOptions, rowData.designStage) },
+  { label: '操作', width: 86, cellRenderer: ({ rowData }) => h('div', { class: 'ops' }, [
     h('button', { type: 'button', onClick: () => openRow(rowData, 'detail') }, '详情'),
     h('button', { type: 'button', onClick: () => openRow(rowData, 'edit') }, '编辑'),
   ]) },
