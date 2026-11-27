@@ -1,6 +1,6 @@
 {
   "name": "x-widgets-element-plus",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Vue 3 form component library built on Element Plus 2 with typed schema-driven forms",
   "type": "module",
   "main": "./dist/index.cjs",

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2
+
+- Polished docs: select placeholders, full-width package tables, Shiki-highlighted and smaller code with scaffolding stripped, default field spacing, a slot-rendering demo covering template/h()/TSX, split basic/advanced/slots pages with regrouped navigation, refreshed screenshots, and an exported `FormBlockSlotRenderContext` type.
+
 ## 0.1.1
 
 - Fixed documentation favicon, apple-touch-icon, gallery screenshots and links returning 404 on GitHub Pages by prefixing them with the VitePress `base` path.
